@@ -1,0 +1,28 @@
+{
+  "name": "scss-base",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalicki2k/scss-base.git"
+  },
+  "author": "Sebastian Kalicki <sebastian@kalicki.email>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kalicki2k/scss-base/issues"
+  },
+  "homepage": "https://github.com/kalicki2k/scss-base#readme",
+  "dependencies": {
+    "normalize-scss": "^6.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer-core": "^6.0.1",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.0.0",
+    "gulp-sourcemaps": "^1.9.1"
+  }
+}
