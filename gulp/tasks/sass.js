@@ -7,7 +7,8 @@
  * @version 0.1.0
  */
 
-var config = require('../config'),
+var autoprefixer = require('gulp-autoprefixer'),
+	config = require('../config'),
 	gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	sourcemaps = require('gulp-sourcemaps');
@@ -15,6 +16,7 @@ var config = require('../config'),
 gulp.task('sass', function postcss() {
 	return gulp.src(config.sass.src)
 		.pipe(sourcemaps.init())
+		.pipe(autoprefixer(config.sass.autoprefixer))
 		.pipe(sass().on('error', sass.logError))
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest(config.sass.dev));

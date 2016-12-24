@@ -9,6 +9,7 @@
 module.exports = {
 	sass: {
 		src: 'scss/**/*.s+(a|c)ss',
-		dev: 'css/'
+		dev: 'css/',
+		autoprefixer: ['IE 10', '> 1%']
 	}
 };
