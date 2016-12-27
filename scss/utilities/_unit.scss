@@ -1,0 +1,68 @@
+/// Removes the unit from a value, returning the number only.
+///
+/// @param {Number} $num - Number to strip unit from.
+///
+/// @returns {Number} The same number, sans unit.
+@function strip-unit($num) {
+    @return $num / ($num * 0 + 1);
+}
+
+/// Converts a value to matching rem value.
+///
+/// @param {Number} $value - Pixel value to convert.
+/// @param {Number} $base [$base-font-size] - Base for pixel conversion.
+///
+/// @returns {Number} A number in rems, calculated based on the given value and the base pixel value.
+@function rem($value, $base: $base-font-size) {
+
+    // Convert $base to pixels
+    @if unit($base) == '%' {
+        $base: ($base / 100%) * 16px;
+    } @else if unit($base) == 'em' {
+        $base: strip-unit($base) * 16px;
+    } @else if unit($base) == 'rem' {
+        $base: strip-unit($base) * 16px;
+    }
+
+    // Convert $value to pixels
+    @if unit($value) == '%' {
+        $value: ($value / 100%) * $base;
+    } @else if unit($value) == 'em' {
+        $value: strip-unit($value) * $base;
+    } @else if unit($value) == 'rem' {
+        $value: strip-unit($value) * $base;
+    }
+
+    // Calculate rem
+    @if unit($value) != 'rem' {
+        $value: strip-unit($value) / strip-unit($base) * 1rem;
+    }
+
+    // Turn 0rem into 0
+    @if $value == 0rem {
+        $value: 0;
+    }
+
+    @return $value;
+}
+
+/// Converts one or more pixel values into matching rem values.
+///
+/// @param {Number|List} $values - One or more values to convert.
+/// @param {Number} $base [$base-font-size] - Base for pixel conversion.
+///
+/// @returns {List} A list of converted values.
+@function rem-calc($values, $base: $base-font-size) {
+    $rem-values: ();
+    $count: length($values);
+
+    @if $count == 1 {
+        @return rem($values, $base);
+    }
+
+    @for $i from 1 through $count {
+        $rem-values: append($rem-values, rem(nth($values, $i), $base));
+    }
+
+    @return $rem-values;
+}
