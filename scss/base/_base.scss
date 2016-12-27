@@ -81,4 +81,17 @@ $base-text-rendering: optimizeLegibility !default;
         -moz-osx-font-smoothing: grayscale;
         -webkit-font-smoothing: antialiased;
     }
+
+    img {
+        border: 0;
+
+        // Get rid of gap under images by making them display: inline-block; by default
+        display: inline-block;
+        vertical-align: middle;
+
+        // Grid defaults to get images and embeds to work properly
+        height: auto;
+        max-width: 100%;
+        -ms-interpolation-mode: bicubic;
+    }
 }
