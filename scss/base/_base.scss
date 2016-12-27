@@ -1,4 +1,84 @@
+/// Background color of the body.
+///
+/// @type Color
+$base-background: $white !default;
+
+/// Text color of the body.
+///
+/// @type Color
+$base-font-color: $black !default;
+
 /// Font size attribute applied to `<html>` and `<body>`.
 ///
 /// @type Number
 $base-font-size: 100% !default;
+
+/// Font stack for sans serif font family
+///
+/// @type List
+$base-font-family-sans-serif: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif !default;
+
+/// Font stack for serif font family
+///
+/// @type List
+$base-font-family-serif: Georgia, Cambria, 'Times New Roman', Times, serif !default;
+
+/// Font stack for monospace font family
+///
+/// @type List
+$base-font-family-monospace: Consolas, 'Liberation Mono', Courier, monospace !default;
+
+/// Font stack of the body.
+///
+/// @type List
+$base-font-family: $base-font-family-sans-serif !default;
+
+/// Base font weight used for normal type.
+///
+/// @type Keyword | Number
+$base-font-weight-normal: normal !default;
+
+/// Base font weight used for bold type.
+///
+/// @type Keyword | Number
+$base-font-weight-bold: bold !default;
+
+/// Line height of the body. `$base-lineheight` is 24px while `$base-font-size` is 16px
+///
+///
+/// @type Number
+$base-line-height: 1.5 !default;
+
+/// Text rendering method for the body text.
+///
+/// @type String
+$base-text-rendering: optimizeLegibility !default;
+
+@mixin base() {
+
+    // Set box-sizing globally to handle padding and border widths
+    *,
+    *::before,
+    *::after {
+        box-sizing: inherit;
+    }
+
+    html {
+        box-sizing: border-box;
+        font-size: $base-font-size;
+    }
+
+    // Default body styles
+    body {
+        background: $base-background;
+        color: $base-font-color;
+        font-family: $base-font-family;
+        font-weight: $base-font-weight-normal;
+        line-height: $base-line-height;
+        margin: 0;
+        padding: 0;
+        text-rendering: $base-text-rendering;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+    }
+}
