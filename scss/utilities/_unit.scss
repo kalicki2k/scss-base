@@ -46,6 +46,15 @@
     @return $value;
 }
 
+/// Converts a value to em.
+/// @access private
+///
+/// @param {Number} $value - Unitless, px or rem value to convert.
+@function em($value, $base: $base-font-size) {
+    @return strip-unit(rem($value, $base)) * 1em;
+}
+
+
 /// Converts one or more pixel values into matching rem values.
 ///
 /// @param {Number|List} $values - One or more values to convert.

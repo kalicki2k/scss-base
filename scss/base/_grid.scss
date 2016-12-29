@@ -1,0 +1,104 @@
+/// The maximum width of a row.
+///
+/// @type Number
+$grid-row-width: $base-width !default;
+
+/// The default column count of a grid. Changing this value affects the logic of the grid mixins, and the number of CSS classes output.
+///
+/// @type Number
+$grid-column-count: 12 !default;
+
+/// The amount of space between columns at different screen sizes.
+///
+/// @type Map | Number
+$grid-column-gutter: (
+    small: 20px,
+    medium: 30px
+) !default;
+
+@mixin grid-row($size: $grid-row-width) {
+    display: flex;
+    flex-flow: row wrap;
+    max-width: $size;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@mixin grid-row-nest-gutter($gutter: $grid-column-gutter) {
+    @if type-of($gutter) == 'map' {
+        @each $breakpoint, $value in $gutter {
+            @if strip-unit($value) > 0 {
+                $margin: rem-calc($value) / 2 * -1;
+
+                @include breakpoint-up($breakpoint) {
+                    margin-right: $margin;
+                    margin-left: $margin;
+                }
+            }
+        }
+    } @else if type-of($gutter) == 'number' and strip-unit($gutter) > 0 {
+        $margin: rem-calc($gutter) / 2 * -1;
+        margin-right: $margin;
+        margin-left: $margin;
+    }
+}
+
+@mixin grid-column($columns: expand) {
+    @if $columns == expand {
+        flex: 1 1 0px;
+        min-width: initial;
+    } @else if ($columns == shrink) {
+        flex: 0 0 auto;
+    } @else {
+        flex: 0 0 percentage($columns / $grid-column-count);
+        max-width: percentage($columns / $grid-column-count)
+    }
+
+}
+
+@mixin grid-column-gutter($gutter: $grid-column-gutter) {
+    @if type-of($gutter) == 'map' {
+        @each $breakpoint, $value in $gutter {
+            @if strip-unit($value) > 0 {
+                $padding: rem-calc($value) / 2;
+
+                @include breakpoint-up($breakpoint) {
+                    padding-left: $padding;
+                    padding-right: $padding;
+                }
+            }
+        }
+    } @else if type-of($gutter) == 'number' and strip-unit($gutter) > 0 {
+        $padding: rem-calc($gutter) / 2;
+        padding-left: $padding;
+        padding-right: $padding;
+    }
+}
+
+@mixin grid() {
+
+    .row {
+        @include grid-row;
+
+        // Nesting behavior
+        & & {
+            @include grid-row-nest-gutter;
+        }
+    }
+
+    .column {
+        @include grid-column;
+        @include grid-column-gutter;
+    }
+
+    @each $breakpoint in map-keys($breakpoints) {
+        @include breakpoint-up($breakpoint) {
+            @for $i from 1 through $grid-column-count {
+                // Sizing
+                .#{$breakpoint}-#{$i} {
+                    @include grid-column($i);
+                }
+            }
+        }
+    }
+}

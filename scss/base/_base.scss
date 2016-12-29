@@ -13,17 +13,17 @@ $base-font-color: $black !default;
 /// @type Number
 $base-font-size: 100% !default;
 
-/// Font stack for sans serif font family
+/// Font stack of sans serif font family
 ///
 /// @type List
 $base-font-family-sans-serif: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif !default;
 
-/// Font stack for serif font family
+/// Font stack of serif font family
 ///
 /// @type List
 $base-font-family-serif: Georgia, Cambria, 'Times New Roman', Times, serif !default;
 
-/// Font stack for monospace font family
+/// Font stack of monospace font family
 ///
 /// @type List
 $base-font-family-monospace: Consolas, 'Liberation Mono', Courier, monospace !default;
@@ -53,6 +53,11 @@ $base-line-height: 1.5 !default;
 ///
 /// @type String
 $base-text-rendering: optimizeLegibility !default;
+
+/// Base width of your site.
+///
+/// @type Number
+$base-width: rem(1200) !default;
 
 @mixin base() {
 
