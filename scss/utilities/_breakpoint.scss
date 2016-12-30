@@ -9,8 +9,6 @@ $breakpoints: (
     xxlarge: 1440px,
 ) !default;
 
-
-
 @mixin breakpoint-up($breakpoint) {
     $min: map-get($breakpoints, $breakpoint);
     @if $min and strip-unit($min) > 0 {
