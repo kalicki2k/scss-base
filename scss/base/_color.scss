@@ -3,7 +3,22 @@
 /// @type Color
 $black: #000000 !default;
 
+/// Color used for grey ui items.
+///
+/// @type Color
+$grey: #9e9e9e !default;
+
 /// Color used for white ui items.
 ///
 /// @type Color
 $white: #ffffff !default;
+
+/// Color used for blue ui items.
+///
+/// @type Color
+$blue: #2185d0 !default;
+
+/// Color used for primary ui items.
+///
+/// @type Color
+$primary-color: $blue !default;

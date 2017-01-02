@@ -59,6 +59,20 @@ $base-text-rendering: optimizeLegibility !default;
 /// @type Number
 $base-width: rem(1200) !default;
 
+/// Global value used for all elements that have a border radius.
+///
+/// @type Number
+$base-radius: 3px !default;
+
+/// Sets the text direction of the CSS. Can be either `ltr` or `rtl`.
+///
+/// @type Keyword
+$base-text-direction: ltr !default;
+
+// Internal variables used for text direction
+$base-left: if($base-text-direction == rtl, right, left);
+$base-right: if($base-text-direction == rtl, left, right);
+
 @mixin base() {
 
     // Set box-sizing globally to handle padding and border widths
@@ -71,6 +85,7 @@ $base-width: rem(1200) !default;
     html {
         box-sizing: border-box;
         font-size: $base-font-size;
+        text-rendering: optimizeLegibility
     }
 
     // Default body styles
