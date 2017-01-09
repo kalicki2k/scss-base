@@ -72,7 +72,7 @@ $base-text-direction: ltr !default;
 $base-left: if($base-text-direction == rtl, right, left);
 $base-right: if($base-text-direction == rtl, left, right);
 
-@mixin base() {
+@mixin generic() {
 
     // Set box-sizing globally to handle padding and border widths
     *,
