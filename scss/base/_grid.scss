@@ -16,14 +16,6 @@ $grid-column-gutter: (
     medium: 30px
 ) !default;
 
-@mixin grid-row($size: $grid-row-width) {
-    display: flex;
-    flex-flow: row wrap;
-    max-width: $size;
-    margin-right: auto;
-    margin-left: auto;
-}
-
 @mixin grid-row-nest-gutter($gutter: $grid-column-gutter) {
     @if type-of($gutter) == 'map' {
         @each $breakpoint, $value in $gutter {
@@ -79,7 +71,11 @@ $grid-column-gutter: (
 @mixin grid() {
 
     .row {
-        @include grid-row;
+        display: flex;
+        flex-flow: row wrap;
+        max-width: $grid-row-width;
+        margin-right: auto;
+        margin-left: auto;
 
         // Nesting
         & & {
@@ -87,16 +83,14 @@ $grid-column-gutter: (
         }
 
         // Collapsing
-        &.collapse {
-
-            > .column {
-                padding-left: 0;
-                padding-right: 0;
-            }
+        &.collapse > .column {
+            padding-left: 0;
+            padding-right: 0;
         }
 
         // Expanding
-        &.expand {
+        &.expand,
+        &.expand .row {
             max-width: none;
         }
     }
