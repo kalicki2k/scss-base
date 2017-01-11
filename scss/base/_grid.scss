@@ -49,6 +49,7 @@ $grid-column-gutter: (
         min-width: initial;
     } @else if ($columns == shrink) {
         flex: 0 0 auto;
+        max-width: 100%;
     } @else {
         flex: 0 0 percentage($columns / $grid-column-count);
         max-width: percentage($columns / $grid-column-count)
@@ -80,15 +81,34 @@ $grid-column-gutter: (
     .row {
         @include grid-row;
 
-        // Nesting behavior
+        // Nesting
         & & {
             @include grid-row-nest-gutter;
+        }
+
+        // Collapsing
+        &.collapse {
+
+            > .column {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+
+        // Expanding
+        &.expand {
+            max-width: none;
         }
     }
 
     .column {
         @include grid-column;
         @include grid-column-gutter;
+
+        // Sizing
+        &.shrink {
+            @include grid-column(shrink);
+        }
     }
 
     @each $breakpoint in map-keys($breakpoints) {
