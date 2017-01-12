@@ -58,6 +58,11 @@ $base-text-rendering: optimizeLegibility !default;
 /// @type Number
 $base-width: rem(1200) !default;
 
+/// Global value used for margin on components.
+///
+/// @type Number
+$base-margin: rem-calc(16) !default;
+
 /// Global value used for all elements that have a border radius.
 ///
 /// @type Number

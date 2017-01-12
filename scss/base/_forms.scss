@@ -1,7 +1,7 @@
 /// Global spacing for form elements.
 ///
 /// @type Number
-$form-spacing: rem-calc(16) !default;
+$form-spacing: $base-margin !default;
 
 /// Default padding between the legend text and fieldset border.
 ///
@@ -69,42 +69,52 @@ $input-shadow-focus: unset !default;
 $input-transition: border-color .2s ease-in-out !default;
 
 /// Background color for select menus.
+///
 /// @type Color
 $select-background: $white !default;
 
 /// Color of the dropdown triangle inside select menus. Set to `transparent` to remove it entirely.
+///
 /// @type Color
 $select-triangle-color: $grey !default;
 
 /// Default radius for select menus.
+///
 /// @type Color
 $select-radius: $base-radius !default;
 
 /// Color for form labels.
+///
 /// @type Color
 $label-color: $black !default;
 
 /// Font size for form labels.
+///
 /// @type Number
 $label-font-size: rem-calc(14) !default;
 
 /// Font weight for form labels.
+///
 /// @type Keyword
 $label-font-weight: $base-font-weight-normal !default;
 
 /// Line height for form labels. The higher the number, the more space between the label and its input field.
+///
 /// @type Number
 $label-line-height: 1.8 !default;
 
 /// Default color for help text.
+///
 /// @type Color
 $help-text-color: $black !default;
 
 /// Default font size for help text.
+///
 /// @type Number
 $help-text-font-size: rem-calc(13) !default;
 
 /// Default font style for help text.
+///
 /// @type Keyword
 $help-text-font-style: italic !default;
 
