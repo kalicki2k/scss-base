@@ -1,0 +1,302 @@
+/// Global spacing for form elements.
+///
+/// @type Number
+$form-spacing: rem-calc(16) !default;
+
+/// Default padding between the legend text and fieldset border.
+///
+/// @type Number
+$legend-padding: rem-calc(0 3) !default;
+
+/// Background color of text inputs.
+///
+/// @type Color
+$input-background: $white !default;
+
+/// Background color of focused of text inputs.
+///
+/// @type Color
+$input-background-focus: $white !default;
+
+/// Font color of text inputs.
+///
+/// @type Color
+$input-color: $black !default;
+
+/// Border around text inputs.
+///
+/// @type Border
+$input-border: 1px solid $grey !default;
+
+/// Border around focused text inputs.
+///
+/// @type Color
+$input-border-focus: 1px solid $primary-color !default;
+
+/// Radius for text inputs.
+///
+/// @type Border
+$input-radius: $base-radius !default;
+
+/// Font family of text inputs.
+///
+/// @type Font
+$input-font-family: inherit !default;
+
+/// Font size of text inputs.
+///
+/// @type Number
+$input-font-size: rem-calc(16) !default;
+
+/// Font weight of text inputs.
+///
+/// @type Keyword
+$input-font-weight: $base-font-weight-normal !default;
+
+/// Box shadow inside text inputs when not focused.
+///
+/// @type Shadow
+$input-shadow: unset !default;
+
+/// Box shadow outside text inputs when focused.
+///
+/// @type Shadow
+$input-shadow-focus: unset !default;
+
+/// Properties to transition on text inputs.
+///
+/// @type Transition
+$input-transition: border-color .2s ease-in-out !default;
+
+/// Background color for select menus.
+/// @type Color
+$select-background: $white !default;
+
+/// Color of the dropdown triangle inside select menus. Set to `transparent` to remove it entirely.
+/// @type Color
+$select-triangle-color: $grey !default;
+
+/// Default radius for select menus.
+/// @type Color
+$select-radius: $base-radius !default;
+
+/// Color for form labels.
+/// @type Color
+$label-color: $black !default;
+
+/// Font size for form labels.
+/// @type Number
+$label-font-size: rem-calc(14) !default;
+
+/// Font weight for form labels.
+/// @type Keyword
+$label-font-weight: $base-font-weight-normal !default;
+
+/// Line height for form labels. The higher the number, the more space between the label and its input field.
+/// @type Number
+$label-line-height: 1.8 !default;
+
+/// Default color for help text.
+/// @type Color
+$help-text-color: $black !default;
+
+/// Default font size for help text.
+/// @type Number
+$help-text-font-size: rem-calc(13) !default;
+
+/// Default font style for help text.
+/// @type Keyword
+$help-text-font-style: italic !default;
+
+/// Adds a downward-facing triangle as a background image to an element. The image is formatted as an SVG, making it easy to change the color. Because Internet Explorer doesn't support encoded SVGs as background images, a PNG fallback is also included.
+/// There are two PNG fallbacks: a black triangle and a white triangle. The one used depends on the lightness of the input color.
+///
+/// @param {Color} $color [$black] - Color to use for the triangle.
+@mixin background-triangle($color: $black) {
+  $rgb: 'rgb%28#{round(red($color))}, #{round(green($color))}, #{round(blue($color))}%29';
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: #{$rgb}'></polygon></svg>");
+}
+
+@mixin forms() {
+
+  fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  legend {
+    max-width: 100%;
+    margin-bottom: $form-spacing * 0.5;
+  }
+
+  label {
+    color: $label-color;
+    display: block;
+    font: {
+      size: $label-font-size;
+      weight: $label-font-weight;
+    }
+    line-height: $label-line-height;
+
+    &.middle {
+      $input-border-width: get-value($input-border, width);
+
+      margin: 0 0 $form-spacing;
+      padding: ($form-spacing / 2 + rem-calc($input-border-width)) 0;
+    }
+  }
+
+  [type="text"],
+  [type="password"],
+  [type="date"],
+  [type="datetime"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="week"],
+  [type="email"],
+  [type="number"],
+  [type="search"],
+  [type="tel"],
+  [type="time"],
+  [type="url"],
+  [type="color"],
+  textarea {
+    background-color: $input-background;
+    border: $input-border;
+    border-radius: $input-radius;
+    box-shadow: $input-shadow;
+    box-sizing: border-box;
+    color: $input-color;
+    display: block;
+    font: {
+      family: $input-font-family;
+      size: $input-font-size;
+      weight: $input-font-weight;
+    }
+    height: ($input-font-size + ($form-spacing * $base-line-height) - rem-calc(1));
+    margin: 0 0 $form-spacing;
+    padding: $form-spacing / 2;
+    width: 100%;
+
+    @if has-value($input-transition) {
+      transition: $input-transition;
+    }
+
+    // Focus state
+    &:focus {
+      background-color: $input-background-focus;
+      border: $input-border-focus;
+      box-shadow: $input-shadow-focus;
+      outline: none;
+
+      @if has-value($input-transition) {
+        transition: $input-transition;
+      }
+    }
+  }
+
+  textarea {
+    height: auto;
+    min-height: 50px;
+  }
+
+  select {
+    height: ($input-font-size + ($form-spacing * 1.5) - rem-calc(1));
+    margin: 0 0 $form-spacing;
+    padding: ($form-spacing / 2);
+    appearance: none;
+    border: $input-border;
+    border-radius: $select-radius;
+    background-color: $select-background;
+    font-family: $input-font-family;
+    font-size: $input-font-size;
+    line-height: normal;
+    color: $input-color;
+    width: 100%;
+
+    @if $select-triangle-color != transparent {
+      @include background-triangle($select-triangle-color);
+      background-origin: content-box;
+      background-position: $base-right (-$form-spacing) center;
+      background-repeat: no-repeat;
+      background-size: 9px 6px;
+
+      padding-#{$base-right}: ($form-spacing * 1.5);
+    }
+
+    &:focus {
+      outline: none;
+      border: $input-border-focus;
+      background-color: $input-background-focus;
+      box-shadow: $input-shadow-focus;
+
+      @if has-value($input-transition) {
+        transition: $input-transition;
+      }
+    }
+
+    // Disabled state
+    &:disabled {
+      //background-color: $input-background-disabled;
+      //cursor: $input-cursor-disabled;
+    }
+
+    // Hide the dropdown arrow shown in newer IE versions
+    &::-ms-expand {
+      display: none;
+    }
+
+    &[multiple] {
+      height: auto;
+      background-image: none;
+      padding: ($form-spacing / 2);
+    }
+  }
+
+  [type='file'],
+  [type='checkbox'],
+  [type='radio'] {
+    margin: 0 0 $form-spacing;
+  }
+
+  // Styles for input/label siblings
+  [type='checkbox'] + label,
+  [type='radio'] + label {
+    display: inline-block;
+    vertical-align: baseline;
+
+    margin-#{$base-left}: $form-spacing * 0.5;
+    margin-#{$base-right}: $form-spacing;
+    margin-bottom: 0;
+
+    &[for] {
+      cursor: pointer;
+    }
+  }
+
+  // Normalize file input width
+  [type='file'] {
+    width: 100%;
+  }
+
+
+
+
+  .help-text {
+    margin-top: ($form-spacing * 0.5) * -1;
+    font-size: $help-text-font-size;
+    font-style: $help-text-font-style;
+    color: $help-text-color;
+  }
+
+  .success,
+  .success > .help-text {
+    color: $primary-color;
+  }
+
+  .danger,
+  .danger > .help-text {
+    color: $red;
+  }
+}
