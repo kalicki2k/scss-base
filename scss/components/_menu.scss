@@ -1,0 +1,113 @@
+/// Margin of a menu.
+///
+/// @type Number
+$menu-margin: 0 !default;
+
+/// Left-hand margin of a nested menu.
+///
+/// @type Number
+$menu-margin-nested: rem(16) !default;
+
+/// Padding for items in a menu.
+///
+/// @type Number
+$menu-item-padding: rem(11 16) !default;
+
+/// Text color of an active menu item.
+///
+/// @type Color
+$menu-item-color-active: $white !default;
+
+/// Background color of an active menu item.
+///
+/// @type Color
+$menu-item-background-active: $primary-color !default;
+
+/// Creates the base styles for a Menu.
+@mixin menu-base(
+  $margin: $menu-margin,
+  $item-padding: $menu-item-padding
+) {
+  margin: $margin;
+  list-style-type: none;
+
+  // List items are table cell to allow for vertical alignment
+  > li {
+    display: table-cell;
+    vertical-align: middle;
+
+    // Reset line height to make the height of the overall item easier to calculate
+    > a {
+      display: block;
+      padding: $item-padding;
+      line-height: 1;
+    }
+  }
+
+  // Reset styles of inner elements
+  input,
+  a,
+  button {
+    margin-bottom: 0;
+  }
+}
+
+/// Sets the direction of a Menu.
+/// @param {Keyword} $dir [horizontal] - Direction of the Menu. Can be `horizontal` or `vertical`.
+@mixin menu-direction($dir: horizontal) {
+  @if $dir == horizontal {
+    > li {
+      display: table-cell;
+    }
+  } @else if $dir == vertical {
+    > li {
+      display: block;
+    }
+  } @else {
+    @warn 'The direction used for menu-direction() must be horizontal or vertical.';
+  }
+}
+
+/// Outputs CSS classes for the grid.
+@mixin menu(
+  $active: 'active'
+) {
+  .menu {
+    @include menu-base;
+
+    // Orientation
+    @include menu-direction(horizontal);
+
+    &.vertical {
+      @include menu-direction(vertical);
+    }
+
+    // Responsive orientation
+    @each $size in $breakpoint-classes {
+      @if $size != $breakpoint-smallest {
+        @include breakpoint($size) {
+          &.#{$size}-horizontal {
+            @include menu-direction(horizontal);
+          }
+
+          &.#{$size}-vertical {
+            @include menu-direction(vertical);
+          }
+        }
+      }
+    }
+
+    // Nesting
+    &.nested {
+      margin-#{$base-left}: $menu-margin-nested;
+    }
+
+    // Todo: missed hover state...
+
+    // Active state
+    .active > a {
+      color: $menu-item-color-active;
+      background: $menu-item-background-active;
+    }
+  }
+}
