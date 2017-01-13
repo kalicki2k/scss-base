@@ -15,3 +15,28 @@
   }
   @return true;
 }
+
+/// @todo documentation...
+///
+/// @param {List} $list
+/// @param {Keyword} $keyword
+///
+/// @returns {Mixed} If the value exists, returns the value that was searched for.
+@function get-value($list, $keyword) {
+  // Find the width, style, or color and return it
+  @each $value in $list {
+    $type: type-of($value);
+    @if $keyword == width and $type == 'number' {
+      @return $value;
+    }
+    @else if $keyword == style and $type == 'string' {
+      @return $value;
+    }
+    @else if $keyword == color and $type == 'color' {
+      @return $value;
+    }
+    @else {
+      @warn 'get-value(): Keyword "#{$keyword}" is not defined.';
+    }
+  }
+}
