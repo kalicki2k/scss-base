@@ -1,0 +1,45 @@
+@mixin dropdown-menu() {
+  .dropdown.menu {
+
+    > li {
+      position: relative;
+
+      &.is-active {
+
+        > .menu {
+          display: inline-block;
+        }
+      }
+
+      &.opens-up > .menu {
+        right: auto;
+        bottom: 100%;
+      }
+
+      &.opens-down > .menu {
+        right: auto;
+        top: 100%;
+      }
+
+      &.opens-left > .menu {
+        top: 0;
+        right: 100%;
+      }
+
+      &.opens-right > .menu {
+        top: 0;
+        left: 100%;
+      }
+    }
+
+    // Submenu
+    .menu {
+      background: $dropdownmenu-background;
+      border: $dropdownmenu-border;
+      display: none;
+      position: absolute;
+      min-width: $dropdownmenu-min-width;
+      z-index: 1;
+    }
+  }
+}
