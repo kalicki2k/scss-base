@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../css/base.css">
+</head>
+<body ng-app="base-dropdown">
+
+<div class="docs-example">
+    <div class="row">
+        <div class="column">
+            <div class="dropdown" dropdown>
+                <button>Button 1</button>
+                <div class="dropdown-content">
+                    <ul class="menu">
+                        <li><a href="http://google.de">Google</a></li>
+                        <li><a href>Link 2</a></li>
+                        <li><a href>Link 3</a></li>
+                        <li><a href>Link 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="dropdown" dropdown>
+                <button>Button 2</button>
+                <div class="dropdown-content">
+                    <ul class="menu">
+                        <li><a href>Link 1</a></li>
+                        <li><a href>Link 2</a></li>
+                        <li><a href>Link 3</a></li>
+                        <li><a href>Link 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ul class="dropdown menu">
+    <li>
+        <a href>Link 1</a>
+        <ul class="vertical menu">
+            <li><a href>Link 1 - Sub 1</a></li>
+            <li><a href>Link 1 - Sub 2</a></li>
+            <li><a href>Link 1 - Sub 3</a></li>
+            <li><a href>Link 1 - Sub 4</a></li>
+        </ul>
+    </li>
+    <li class="active"><a href>Link 2</a></li>
+    <li><a href>Link 3</a></li>
+    <li><a href>Link 4</a></li>
+    <li><a href>Link 5</a></li>
+    <li><a href>Link 6</a></li>
+</ul>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+<script src="../javascripts/angular/directives/dropdown.js"></script>
+
+</body>
+</html>
