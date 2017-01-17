@@ -1,8 +1,8 @@
 'use strict';
 
-var yl = angular.module('yl-dropdown-menu', []);
+var base = angular.module('base-dropdown-menu', []);
 
-yl.directive('ylDropdownMenu', function ylDropdownMenuDirective($timeout) {
+base.directive('dropdownMenu', function dropdownMenuDirective($timeout) {
 
 	function anchorAddClass() {
 		angular.element(this).parent().addClass('is-active');
@@ -37,4 +37,3 @@ yl.directive('ylDropdownMenu', function ylDropdownMenuDirective($timeout) {
 		}
 	};
 });
-
