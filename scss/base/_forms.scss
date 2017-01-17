@@ -323,8 +323,15 @@ $help-text-font-style: italic !default;
     @include button-style($primary-color, auto, auto);
   }
 
+  // Input group
+  .input-group {
+    align-items: stretch;
+    display: flex;
+    width: 100%;
+    margin-bottom: $form-spacing;
+  }
 
-
+  // Help text
   .help-text {
     margin-top: ($form-spacing * 0.5) * -1;
     font-size: $help-text-font-size;
