@@ -89,8 +89,8 @@ $grid-column-gutter: (
         }
 
         // Expanding
-        &.expand,
-        &.expand .row {
+        &.expanded,
+        &.expanded .row {
             max-width: none;
         }
     }
