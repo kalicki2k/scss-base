@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../css/base.css">
+</head>
+<body>
+
+<div class="row">
+    <div class="column">
+        <form>
+            <div class="input-group">
+                <span class="input-group-label">Label</span>
+                <input class="input-group-field" type="text">
+                <div class="input-group-button">
+                    <input type="submit" class="button" value="Submit">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="column small-12">
+        <form>
+            <div class="row">
+                <div class="column small-12">
+                    <label>Name
+                        <input class="input" type="text" placeholder="Text input">
+                    </label>
+                </div>
+                <div class="column small-12">
+                    <label>Disabled
+                        <input class="input" type="text" placeholder="Text input" value="Disabled" disabled>
+                    </label>
+                    <label>Readonly
+                        <input class="input" type="text" placeholder="Text input" value="Readonly" readonly>
+                    </label>
+                </div>
+                <div class="column small-12">
+                    <label class="success">Name
+                        <input class="input" type="text" placeholder="Text input">
+                        <p class="help-text">Your password must have at least 10 characters, a number, and an Emoji.</p>
+                    </label>
+                </div>
+                <div class="column small-12">
+                    <label class="danger">Name
+                        <input class="input" type="text" placeholder="Text input">
+                        <p class="help-text">Your password must have at least 10 characters, a number, and an Emoji.</p>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column small-12">
+                    <label>Select Menu
+                        <select>
+                            <option value="husker">Husker</option>
+                            <option value="starbuck">Starbuck</option>
+                            <option value="hotdog">Hot Dog</option>
+                            <option value="apollo">Apollo</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column small-12">
+                    <label>Select Menu
+                        <select multiple>
+                            <option value="husker">Husker</option>
+                            <option value="starbuck">Starbuck</option>
+                            <option value="hotdog">Hot Dog</option>
+                            <option value="apollo">Apollo</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <fieldset class="column small-12 medium-6">
+                    <legend>Choose Your Favorite</legend>
+                    <input type="radio" name="pokemon" value="Red" id="pokemonRed" required><label for="pokemonRed">Red</label>
+                    <input type="radio" name="pokemon" value="Blue" id="pokemonBlue"><label for="pokemonBlue">Blue</label>
+                    <input type="radio" name="pokemon" value="Yellow" id="pokemonYellow"><label for="pokemonYellow">Yellow</label>
+                </fieldset>
+                <fieldset class="column small-12 medium-6">
+                    <legend>Check these out</legend>
+                    <input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
+                    <input id="checkbox2" type="checkbox"><label for="checkbox2">Checkbox 2</label>
+                    <input id="checkbox3" type="checkbox"><label for="checkbox3">Checkbox 3</label>
+                </fieldset>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label>Textarea
+                        <textarea>Hallo</textarea>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <button type="submit">Submit</button>
+                    <button type="reset">Cancel</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="column"><input type="text"></div>
+                <div class="column shrink"><button type="submit">Absenden</button></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>

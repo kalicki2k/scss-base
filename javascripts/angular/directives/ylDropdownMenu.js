@@ -1,6 +1,8 @@
 'use strict';
 
-function ylDropdownMenuDirective($timeout) {
+var yl = angular.module('yl-dropdown-menu', []);
+
+yl.directive('ylDropdownMenu', function ylDropdownMenuDirective($timeout) {
 
 	function anchorAddClass() {
 		angular.element(this).parent().addClass('is-active');
@@ -11,7 +13,6 @@ function ylDropdownMenuDirective($timeout) {
 	}
 
 	return {
-		restrict: 'A',
 		link: function postLink(scope, iElement) {
 			var anchor, submenu, promise,
 				dropdownMenus = iElement[0].querySelectorAll('.menu');
@@ -35,9 +36,5 @@ function ylDropdownMenuDirective($timeout) {
 			});
 		}
 	};
-}
+});
 
-module.exports = {
-	name: 'ylDropdownMenu',
-	fn: ylDropdownMenuDirective
-};
