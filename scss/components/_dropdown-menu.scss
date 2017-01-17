@@ -1,3 +1,18 @@
+/// Background color for dropdowns.
+///
+/// @type Color
+$dropdownmenu-background: $white !default;
+
+/// Border for dropdown sub-menus.
+///
+/// @type List
+$dropdownmenu-border: 1px solid $grey !default;
+
+/// Minimum width of dropdown sub-menus.
+///
+/// @type Length
+$dropdownmenu-min-width: 200px !default;
+
 @mixin dropdown-menu() {
   .dropdown.menu {
 
