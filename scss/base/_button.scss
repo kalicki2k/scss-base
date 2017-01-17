@@ -1,0 +1,133 @@
+/// Default background color for buttons.
+///
+/// @type Color
+$button-background: $grey !default;
+
+/// Background color on hover for buttons.
+///
+/// @type Color
+$button-background-hover: scale-color($button-background, $lightness: -15%) !default;
+
+/// Font color for buttons.
+///
+/// @type List
+$button-color: $white !default;
+
+/// Alternative font color for buttons.
+///
+/// @type List
+$button-color-alt: $black !default;
+
+/// Styles for buttons
+///
+/// @type Map
+$button-styles: (
+  default: (
+    font-size: rem-calc(14),
+    padding: rem-calc(11 14)
+  )
+) !default;
+
+/// Margin around buttons.
+///
+/// @type List
+$button-margin: 0 0 $base-margin 0 !default;
+
+/// Border for buttons
+///
+/// @type Border
+$button-border: 1px solid transparent !default;
+
+/// Border radius for buttons, defaulted to global-radius.
+///
+/// @type Number
+$button-radius: $base-radius !default;
+
+/// Background color lightness on hover for buttons.
+///
+/// @type Number
+$button-background-hover-lightness: -20% !default;
+
+/// transitions for buttons.
+///
+/// @type List
+$button-transition: background-color 0.25s ease-out, color 0.25s ease-out !default;
+
+/// Sets default style of a button.
+@mixin button-base {
+  $default: map-get($button-styles, default);
+
+  display: inline-block;
+  vertical-align: middle;
+  margin: $button-margin;
+  padding: map-get($default, padding);
+
+  -webkit-appearance: none;
+  border: 1px solid transparent;
+  border-radius: $button-radius;
+
+  @if has-value($button-transition) {
+    transition: $button-transition;
+  }
+
+  font-size: map-get($default, font-size);
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+}
+
+// Sets the visual style of a button.
+/// @param {Color} $background [$button-background] - Background color of the button.
+/// @param {Color} $background-hover [$button-background-hover] - Background color of the button on hover. Set to `auto` to have the mixin automatically generate a hover color.
+/// @param {Color} $color [$button-color] - Text color of the button. Set to `auto` to automatically generate a color based on the background color.
+@mixin button-style(
+  $background: $button-background,
+  $background-hover: $button-background-hover,
+  $color: $button-color,
+  $background-hover-lightness: $button-background-hover-lightness
+) {
+  @if $color == auto {
+    $color: foreground-color($background, $button-color-alt, $button-color);
+  }
+
+  @if $background-hover == auto {
+    $background-hover: scale-color($background, $lightness: $background-hover-lightness);
+  }
+
+  background-color: $background;
+  color: $color;
+
+  &:hover,
+  &:focus {
+    background-color: $background-hover;
+    color: $color;
+  }
+}
+
+@mixin button {
+
+  button,
+  .button {
+    @include button-base;
+    @include button-style($color: auto);
+
+    // Styles and sizes
+    @each $size, $button-size in map-remove($button-styles, default) {
+      &.#{$size} {
+        font-size: map_get($button-size, font-size);
+        padding: map_get($button-size, padding);
+      }
+    }
+
+    // Colors
+    &.primary { @include button-style($primary-color, auto, auto); }
+
+    &.info { @include button-style($info-color, auto, auto); }
+
+    &.success { @include button-style($success-color, auto, auto); }
+
+    &.warning { @include button-style($warning-color, auto, auto); }
+
+    &.danger { @include button-style($danger-color, auto, auto); }
+  }
+}
