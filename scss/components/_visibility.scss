@@ -1,0 +1,44 @@
+@mixin visibility() {
+    // Basic hiding class
+    .hide-for-small {
+        display: none !important;
+    }
+
+    // Responsive visibility classes
+    @each $breakpoint in map_keys($breakpoints) {
+        @if $breakpoint != sl-first(map_keys($breakpoints)) {
+            .hide-for-#{$breakpoint} {
+                @include breakpoint-up($breakpoint) {
+                    display: none !important;
+                }
+            }
+
+            .show-for-#{$breakpoint} {
+                @include breakpoint-down($breakpoint) {
+                    display: none !important;
+                }
+            }
+        }
+
+        .hide-for-#{$breakpoint}-only {
+            @include breakpoint-only($breakpoint) {
+                display: none !important;
+            }
+        }
+
+        .show-for-#{$breakpoint}-only {
+            $lower: map-get($breakpoints, $breakpoint);
+            $upper: map-next($breakpoints, $breakpoint);
+
+            @if $upper == null {
+                @media screen and (max-width: $lower) {
+                    display: none !important;
+                }
+            } @else {
+                @media screen and (max-width: $lower), screen and (min-width: $upper) {
+                    display: none !important;
+                }
+            }
+        }
+    }
+}
