@@ -1,0 +1,72 @@
+/// Default background color for labels.
+///
+/// @type Color
+$label-background: $grey !default;
+
+/// Default text color for labels.
+///
+/// @type Color
+$label-color: $black !default;
+
+/// Default font size of labels.
+///
+/// @type Number
+$label-font-size: rem-calc(14) !default;
+
+/// Default padding inside labels.
+///
+/// @type Number
+$label-padding: rem-calc(5 8) !default;
+
+/// Default radius of labels.
+///
+/// @type Number
+$label-radius: $base-radius !default;
+
+/// Font weight of labels.
+///
+/// @type String
+$label-font-weight: $base-font-weight-bold !default;
+
+
+@mixin label-base(
+  $font-size: $label-font-size,
+  $font-weight: $base-font-weight-bold,
+  $padding: $label-padding
+){
+  border-radius: $label-radius;
+  cursor: default;
+  display: inline-block;
+  font: {
+    size: $label-font-size;
+    weight: $font-weight;
+  }
+  line-height: 1;
+  padding: $label-padding;
+  white-space: nowrap;
+}
+
+@mixin label-style(
+  $background: $label-background,
+  $color: $label-color
+) {
+  background: $background;
+  color: $color;
+}
+
+@mixin label {
+  .label {
+    @include label-base;
+    @include label-style;
+
+    &.primary { @include label-style($primary-color, $white); }
+
+    &.info { @include label-style($info-color, $white); }
+
+    &.success { @include label-style($success-color, $white); }
+
+    &.warning { @include label-style($warning-color, $white); }
+
+    &.danger { @include label-style($danger-color, $white); }
+  }
+}
