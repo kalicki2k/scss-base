@@ -4,48 +4,47 @@ var base = angular.module('base-dropdown', []);
 
 base.directive('dropdownToggle', function dropdownToggleDirective($document) {
 
-	var DROPDOWN_CLASS = 'dropdown',
-		DROPDOWN_ACTIVE_CLASS = 'is-active';
+    var DROPDOWN_CLASS = 'dropdown',
+        DROPDOWN_ACTIVE_CLASS = 'is-active';
 
-	function open(container) {
-		container.addClass(DROPDOWN_ACTIVE_CLASS);
-		$document.off('click').one('click', close.bind(null, container));
-	}
+    function open(container) {
+        container.addClass(DROPDOWN_ACTIVE_CLASS);
+        $document.on('click', close.bind(null, container));
+    }
 
-	function close(container) {
-		container.removeClass(DROPDOWN_ACTIVE_CLASS);
-		$document.off('click');
-	}
+    function close(container) {
+        container.removeClass(DROPDOWN_ACTIVE_CLASS);
+        $document.off('click', close.bind(null, container));
+    }
 
-	function closeOther(container) {
-		$document[0].querySelectorAll('.' + DROPDOWN_CLASS + '.' + DROPDOWN_ACTIVE_CLASS + ':not(.menu)')
-			.forEach(function each(dropdownContainer) {
-				if (dropdownContainer !== container[0]) {
-					close(angular.element(dropdownContainer));
-				}
-			});
-	}
+    function closeOthers() {
+        var dropdowns = $document[0].querySelectorAll('.' + DROPDOWN_CLASS + '.' + DROPDOWN_ACTIVE_CLASS);
 
-	return {
-		link: function postLink(scope, iElement) {
-			var container = iElement.parent('.' + DROPDOWN_CLASS),
-				unbindDestroyListener;
+        Array.prototype.slice.call(dropdowns).forEach(function closeAll(dropdownContainer) {
+            close(angular.element(dropdownContainer));
+        });
+    }
 
-			iElement.on('click', function toggleDropdown(event) {
-				event.stopPropagation();
-				if (container.hasClass(DROPDOWN_ACTIVE_CLASS)) {
-					close(container);
-				} else {
-					closeOther(container);
-					open(container);
-				}
-			});
+    return {
+        link: function postLink(scope, iElement) {
+            var container = iElement.parent(),
+                unbindDestroyListener;
 
-			unbindDestroyListener = scope.$on('$destroy', function $destroyListener() {
-				iElement.off('click');
-				$document.off('click');
-				unbindDestroyListener();
-			});
-		}
-	};
+            iElement.on('click', function toggleDropdown(event) {
+                event.stopPropagation();
+                if (container.hasClass(DROPDOWN_ACTIVE_CLASS)) {
+                    close(container);
+                } else {
+                    closeOthers();
+                    open(container);
+                }
+            });
+
+            unbindDestroyListener = scope.$on('$destroy', function $destroyListener() {
+                iElement.off('click');
+                $document.off('click', close.bind(null, container));
+                unbindDestroyListener();
+            });
+        }
+    };
 });
