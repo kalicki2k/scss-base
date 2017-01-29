@@ -101,22 +101,22 @@ $select-radius: $base-radius !default;
 /// Color for form labels.
 ///
 /// @type Color
-$label-color: $black !default;
+$form-label-color: $black !default;
 
 /// Font size for form labels.
 ///
 /// @type Number
-$label-font-size: rem-calc(14) !default;
+$form-label-font-size: rem-calc(14) !default;
 
 /// Font weight for form labels.
 ///
 /// @type Keyword
-$label-font-weight: $base-font-weight-normal !default;
+$form-label-font-weight: $base-font-weight-normal !default;
 
 /// Line height for form labels. The higher the number, the more space between the label and its input field.
 ///
 /// @type Number
-$label-line-height: 1.8 !default;
+$form-label-line-height: 1.8 !default;
 
 /// Default color for help text.
 ///
@@ -156,13 +156,13 @@ $help-text-font-style: italic !default;
   }
 
   label {
-    color: $label-color;
+    color: $form-label-color;
     display: block;
     font: {
-      size: $label-font-size;
-      weight: $label-font-weight;
+      size: $form-label-font-size;
+      weight: $form-label-font-weight;
     }
-    line-height: $label-line-height;
+    line-height: $form-label-line-height;
 
     &.middle {
       $input-border-width: get-value($input-border, width);
