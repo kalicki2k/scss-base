@@ -13,6 +13,21 @@ $menu-margin-nested: rem-calc(16) !default;
 /// @type Number
 $menu-item-padding: rem-calc(11 16) !default;
 
+/// Text color of a menu item.
+///
+/// @type Color
+$menu-item-color: $black !default;
+
+/// Text color of a hover menu item.
+///
+/// @type Color
+$menu-item-color-hover: $black !default;
+
+/// Background color of a hover menu item.
+///
+/// @type Color
+$menu-item-background-hover: $grey !default;
+
 /// Text color of an active menu item.
 ///
 /// @type Color
@@ -52,6 +67,33 @@ $menu-item-background-active: $primary-color !default;
   }
 }
 
+@mixin menu-style(
+  $color: $menu-item-color,
+  $background-hover: $menu-item-background-hover,
+  $color-hover: $menu-item-color-hover,
+  $background-active: $menu-item-background-active,
+  $color-active: $menu-item-color-active
+) {
+  > li {
+
+    > a {
+      color: $color;
+
+      // Hover state
+      &:hover {
+        background-color: $background-hover;
+        color: $color-hover;
+      }
+    }
+
+    // Active state
+    &.active > a {
+      background-color: $background-active;
+      color: $color-active;
+    }
+  }
+}
+
 /// Sets the direction of a Menu.
 /// @param {Keyword} $dir [horizontal] - Direction of the Menu can be `horizontal` or `vertical`.
 @mixin menu-direction($dir: horizontal) {
@@ -72,6 +114,7 @@ $menu-item-background-active: $primary-color !default;
 @mixin menu {
   .menu {
     @include menu-base;
+    @include menu-style;
 
     // Orientation
     @include menu-direction(horizontal);
@@ -98,14 +141,6 @@ $menu-item-background-active: $primary-color !default;
     // Nesting
     &.nested {
       margin-#{$base-left}: $menu-margin-nested;
-    }
-
-    // Todo: missed hover state...
-
-    // Active state
-    .active > a {
-      color: $menu-item-color-active;
-      background: $menu-item-background-active;
     }
   }
 }
