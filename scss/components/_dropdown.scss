@@ -4,11 +4,11 @@ $dropdown-padding: rem-calc(16) !default;
 
 /// Background for dropdown panes.
 /// @type Color
-$dropdown-background: $base-background !default;
+$dropdown-background: $white !default;
 
 /// Border for dropdown panes.
 /// @type List
-$dropdown-border: 1px solid $grey !default;
+$dropdown-border: 1px solid $primary-color !default;
 
 /// Font size for dropdown panes.
 /// @type List
@@ -27,15 +27,23 @@ $dropdown-radius: $base-radius !default;
   .dropdown:not(.menu){
     position: relative;
 
+    > button,
+    > .button {
+
+      &:after {
+        @include icon-base;
+        content: '\e883';
+      }
+    }
+
     > .dropdown-content {
       position: absolute;
       z-index: 10;
 
-      display: block;
+      display: none;
       width: $dropdown-width;
       padding: $dropdown-padding;
 
-      visibility: hidden;
       border: $dropdown-border;
       border-radius: $dropdown-radius;
       background-color: $dropdown-background;
@@ -43,8 +51,30 @@ $dropdown-radius: $base-radius !default;
       font-size: $dropdown-font-size;
     }
 
-    &.is-active > .dropdown-content {
-      visibility: visible;
+    &.opens-up > .dropdown-content {
+      bottom: 100%;
+    }
+
+    &.opens-down > .dropdown-content {
+      top: 100%;
+    }
+
+    &.is-active {
+      > button,
+      > .button {
+
+        &:after {
+          content: '\e886';
+        }
+      }
+
+      > .dropdown-content {
+        display: block;
+
+        &.dropdown-right {
+          right: 0;
+        }
+      }
     }
   }
 }
