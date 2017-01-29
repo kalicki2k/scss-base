@@ -51,7 +51,7 @@ $button-margin: 0 0 $base-margin 0 !default;
 /// @type Border
 $button-border: 1px solid transparent !default;
 
-/// Border radius for buttons, defaulted to global-radius.
+/// Border radius for buttons, defaulted to base-radius.
 ///
 /// @type Number
 $button-radius: $base-radius !default;
