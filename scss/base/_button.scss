@@ -21,11 +21,24 @@ $button-color-alt: $black !default;
 /// Styles for buttons
 ///
 /// @type Map
-$button-styles: (
+$button-sizes: (
+  small: (
+    font-size: rem-calc(12),
+    padding: rem-calc(8 9)
+  ),
   default: (
     font-size: rem-calc(14),
-    padding: rem-calc(11 14)
+    padding: rem-calc(10 12)
+  ),
+  medium: (
+    font-size: rem-calc(16),
+    padding: rem-calc(12 14)
+  ),
+  large: (
+    font-size: rem-calc(20),
+    padding: rem-calc(20 17)
   )
+
 ) !default;
 
 /// Margin around buttons.
@@ -55,22 +68,24 @@ $button-transition: background-color 0.25s ease-out, color 0.25s ease-out !defau
 
 /// Sets default style of a button.
 @mixin button-base {
-  $default: map-get($button-styles, default);
+  $default: map-get($button-sizes, default);
 
   display: inline-block;
   vertical-align: middle;
   margin: $button-margin;
-  padding: map-get($default, padding);
 
   -webkit-appearance: none;
   border: 1px solid transparent;
   border-radius: $button-radius;
 
+  @each $property, $value in map-get($button-sizes, default) {
+    #{$property}: $value;
+  }
+
   @if has-value($button-transition) {
     transition: $button-transition;
   }
 
-  font-size: map-get($default, font-size);
   line-height: 1;
   text-align: center;
   cursor: pointer;
@@ -112,10 +127,11 @@ $button-transition: background-color 0.25s ease-out, color 0.25s ease-out !defau
     @include button-style($color: auto);
 
     // Styles and sizes
-    @each $size, $button-size in map-remove($button-styles, default) {
+    @each $size, $button-size in map-remove($button-sizes, default) {
       &.#{$size} {
-        font-size: map_get($button-size, font-size);
-        padding: map_get($button-size, padding);
+        @each $property, $value in $button-size {
+          #{$property}: $value;
+        }
       }
     }
 
