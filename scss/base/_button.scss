@@ -48,6 +48,7 @@ $button-margin: 0 0 $base-margin 0 !default;
 /// Border for buttons
 ///
 /// @type Border
+/// @todo I'm not sure if we need it...
 $button-border: 1px solid transparent !default;
 
 /// Border radius for buttons, defaulted to base-radius.
@@ -97,7 +98,7 @@ $button-opacity-disabled: .25 !default;
 /// @param {Color} $background [$button-background] - Background color of the button.
 /// @param {Color} $background-hover [$button-background-hover] - Background color of the button on hover. Set to `auto` to have the mixin automatically generate a hover color.
 /// @param {Color} $color [$button-color] - Text color of the button. Set to `auto` to automatically generate a color based on the background color.
-/// @param {Number} $background-hover-lightness [$button-background-hover-lightness] - @Todo Must be documented...
+/// @param {Number} $background-hover-lightness [$button-background-hover-lightness] - @todo Must be documented...
 @mixin button-style(
   $background: $button-background,
   $background-hover: $button-background-hover,
@@ -119,6 +120,29 @@ $button-opacity-disabled: .25 !default;
   &:focus:not(.disabled):not([disabled]) {
     background-color: $background-hover;
     color: $color;
+  }
+}
+
+/// @todo Must be documented...
+@mixin button-outline-style(
+  $color: $button-background,
+  $color-hover: $button-background-hover,
+  $background-hover-lightness: $button-background-hover-lightness
+) {
+  background-color: transparent;
+  border: 1px solid $color;
+  color: $color;
+
+  &:hover:not(.disabled):not([disabled]),
+  &:focus:not(.disabled):not([disabled]) {
+
+    @if $color-hover == auto {
+      $color-hover: scale-color($color, $lightness: $background-hover-lightness);
+    }
+
+    background-color: transparent;
+    border: 1px solid $color-hover;
+    color: $color-hover;
   }
 }
 
@@ -165,6 +189,21 @@ $button-opacity-disabled: .25 !default;
         background-color: inherit;
         color: $anchor-color-hover;
       }
+    }
+
+    // Outline style
+    &.outlined {
+      @include button-outline-style;
+
+      &.primary { @include button-outline-style($primary-color, auto); }
+
+      &.info { @include button-outline-style($info-color, auto); }
+
+      &.success { @include button-outline-style($success-color, auto); }
+
+      &.warning { @include button-outline-style($warning-color, auto); }
+
+      &.danger { @include button-outline-style($danger-color, auto); }
     }
   }
 }
