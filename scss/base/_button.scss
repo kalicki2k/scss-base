@@ -60,10 +60,15 @@ $button-radius: $base-radius !default;
 /// @type Number
 $button-background-hover-lightness: -20% !default;
 
-/// transitions for buttons.
+/// Transitions for buttons.
 ///
 /// @type List
 $button-transition: background-color 0.25s ease-out, color 0.25s ease-out !default;
+
+/// Opacity for a disabled button.
+///
+/// @type List
+$button-opacity-disabled: .25 !default;
 
 /// Sets default style of a button.
 @mixin button-base {
@@ -88,10 +93,11 @@ $button-transition: background-color 0.25s ease-out, color 0.25s ease-out !defau
   cursor: pointer;
 }
 
-// Sets the visual style of a button.
+/// Sets the visual style of a button.
 /// @param {Color} $background [$button-background] - Background color of the button.
 /// @param {Color} $background-hover [$button-background-hover] - Background color of the button on hover. Set to `auto` to have the mixin automatically generate a hover color.
 /// @param {Color} $color [$button-color] - Text color of the button. Set to `auto` to automatically generate a color based on the background color.
+/// @param {Number} $background-hover-lightness [$button-background-hover-lightness] - @Todo Must be documented...
 @mixin button-style(
   $background: $button-background,
   $background-hover: $button-background-hover,
@@ -109,8 +115,8 @@ $button-transition: background-color 0.25s ease-out, color 0.25s ease-out !defau
   background-color: $background;
   color: $color;
 
-  &:hover:not(:disabled):not([disabled]),
-  &:focus:not(:disabled):not([disabled]) {
+  &:hover:not(.disabled):not([disabled]),
+  &:focus:not(.disabled):not([disabled]) {
     background-color: $background-hover;
     color: $color;
   }
@@ -133,9 +139,10 @@ $button-transition: background-color 0.25s ease-out, color 0.25s ease-out !defau
     }
 
     // Disabled state
-    &:disabled,
+    &.disabled,
     &[disabled] {
       cursor: not-allowed;
+      opacity: $button-opacity-disabled;
     }
 
     // Colors
@@ -148,5 +155,16 @@ $button-transition: background-color 0.25s ease-out, color 0.25s ease-out !defau
     &.warning { @include button-style($warning-color, auto, auto); }
 
     &.danger { @include button-style($danger-color, auto, auto); }
+
+    &.link {
+      background-color: transparent;
+      color: $anchor-color;
+
+      &:hover:not(.disabled):not([disabled]),
+      &:focus:not(.disabled):not([disabled]) {
+        background-color: inherit;
+        color: $anchor-color-hover;
+      }
+    }
   }
 }
