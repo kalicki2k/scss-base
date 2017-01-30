@@ -38,7 +38,6 @@ $button-sizes: (
     font-size: rem-calc(20),
     padding: rem-calc(20 17)
   )
-
 ) !default;
 
 /// Margin around buttons.
@@ -69,13 +68,11 @@ $button-transition: background-color 0.25s ease-out, color 0.25s ease-out !defau
 /// Sets default style of a button.
 @mixin button-base {
   $default: map-get($button-sizes, default);
-
   display: inline-block;
   vertical-align: middle;
   margin: $button-margin;
-
   -webkit-appearance: none;
-  border: 1px solid transparent;
+  border: $button-border;
   border-radius: $button-radius;
 
   @each $property, $value in map-get($button-sizes, default) {
@@ -112,8 +109,8 @@ $button-transition: background-color 0.25s ease-out, color 0.25s ease-out !defau
   background-color: $background;
   color: $color;
 
-  &:hover,
-  &:focus {
+  &:hover:not(:disabled):not([disabled]),
+  &:focus:not(:disabled):not([disabled]) {
     background-color: $background-hover;
     color: $color;
   }
@@ -133,6 +130,12 @@ $button-transition: background-color 0.25s ease-out, color 0.25s ease-out !defau
           #{$property}: $value;
         }
       }
+    }
+
+    // Disabled state
+    &:disabled,
+    &[disabled] {
+      cursor: not-allowed;
     }
 
     // Colors
