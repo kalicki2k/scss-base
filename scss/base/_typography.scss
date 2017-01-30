@@ -44,8 +44,7 @@ $header-font-weight: $base-font-weight-normal !default;
 $header-styles: (
   small: (
     h1: (
-      font-size: rem-calc(24),
-      margin-bottom: rem-calc(20)
+      font-size: rem-calc(24)
     ),
     h2: (
       font-size: rem-calc(20)
@@ -346,8 +345,8 @@ $keystroke-radius: $base-radius !default;
     line-height: inherit;
     text-decoration: $anchor-text-decoration;
 
-    &:hover,
-    &:focus {
+    &:hover:not(.disabled):not([disabled]),
+    &:focus:not(.disabled):not([disabled]) {
       color: $anchor-color-hover;
       @if $anchor-text-decoration-hover != $anchor-text-decoration {
         text-decoration: $anchor-text-decoration-hover;
