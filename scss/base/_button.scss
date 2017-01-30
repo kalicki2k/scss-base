@@ -116,6 +116,7 @@ $button-opacity-disabled: .25 !default;
   background-color: $background;
   color: $color;
 
+  &.active:not(.disabled):not([disabled]),
   &:hover:not(.disabled):not([disabled]),
   &:focus:not(.disabled):not([disabled]) {
     background-color: $background-hover;
@@ -184,6 +185,7 @@ $button-opacity-disabled: .25 !default;
       background-color: transparent;
       color: $anchor-color;
 
+      &.active:not(.disabled):not([disabled]),
       &:hover:not(.disabled):not([disabled]),
       &:focus:not(.disabled):not([disabled]) {
         background-color: inherit;
