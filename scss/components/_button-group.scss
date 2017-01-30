@@ -18,15 +18,36 @@ $button-group-radius: $button-radius !default;
   button {
     border-radius: 0;
     margin: 0;
+  }
+
+  > .button,
+  > button {
 
     &:first-child {
-      border-top-#{$base-left}-radius: $button-group-radius;
-      border-bottom-#{$base-left}-radius: $button-group-radius;
+      @extend %button-radius-first-child;
     }
 
     &:last-child {
-      border-top-#{$base-right}-radius: $button-group-radius;
-      border-bottom-#{$base-right}-radius: $button-group-radius;
+      @extend %button-radius-last-child;
+    }
+  }
+}
+
+@mixin button-group-dropdown {
+
+  &:first-child {
+
+    > .button,
+    > button {
+      @extend %button-radius-first-child;
+    }
+  }
+
+  &:last-child {
+
+    > .button,
+    > button {
+      @extend %button-radius-last-child;
     }
   }
 }
@@ -34,5 +55,32 @@ $button-group-radius: $button-radius !default;
 @mixin button-group {
   .button-group {
     @include button-group-base;
+
+    .dropdown {
+      @include button-group-dropdown;
+    }
+
+    // Sizes
+    @each $size, $button-size in map-remove($button-sizes, default) {
+      &.#{$size} {
+        @each $property, $value in $button-size {
+          .button,
+          button {
+            #{$property}: $value;
+          }
+        }
+      }
+    }
+  }
+
+  // Placeholder selectors
+  %button-radius-first-child {
+    border-top-#{$base-left}-radius: $button-group-radius;
+    border-bottom-#{$base-left}-radius: $button-group-radius;
+  }
+
+  %button-radius-last-child {
+    border-top-#{$base-right}-radius: $button-group-radius;
+    border-bottom-#{$base-right}-radius: $button-group-radius;
   }
 }

@@ -6,10 +6,10 @@
   <link rel="stylesheet" type="text/css" href="../css/normalize.css">
   <link rel="stylesheet" type="text/css" href="../css/base.css">
 </head>
-<body>
+<body ng-app="base-dropdown">
 
 <div class="docs-example">
-  <div class="row">
+    <div class="row">
     <div class="column">
       <div class="button-group">
         <a class="button">One</a>
@@ -17,14 +17,58 @@
         <a class="button">Three</a>
       </div>
       <div class="button-group">
+        <div class="dropdown">
+          <button dropdown-toggle>Button 1</button>
+          <div class="dropdown-content">
+            <ul class="vertical menu">
+              <li><a href>Link 1</a></li>
+              <li><a href>Link 2</a></li>
+              <li><a href>Link 3</a></li>
+              <li><a href>Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button dropdown-toggle>Button 2</button>
+          <div class="dropdown-content">
+            <ul class="vertical menu">
+              <li><a href>Link 1</a></li>
+              <li><a href>Link 2</a></li>
+              <li><a href>Link 3</a></li>
+              <li><a href>Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button dropdown-toggle>Button 3</button>
+          <div class="dropdown-content">
+            <ul class="vertical menu">
+              <li><a href>Link 1</a></li>
+              <li><a href>Link 2</a></li>
+              <li><a href>Link 3</a></li>
+              <li><a href>Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+        <button dropdown-toggle>Button 3</button>
+      </div>
+      <div class="button-group">
         <a class="primary button">View</a>
         <a class="success button">Edit</a>
         <a class="warning button">Share</a>
         <a class="danger button">Delete</a>
       </div>
+      <div class="small button-group">
+        <a class="button">Small</a>
+        <a class="button">Button</a>
+        <a class="button">Group</a>
+      </div>
     </div>
   </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+<script src="../javascripts/angular/directives/dropdownToggle.js"></script>
 
 </body>
 </html>

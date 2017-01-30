@@ -126,7 +126,7 @@ $button-transition: background-color 0.25s ease-out, color 0.25s ease-out !defau
     @include button-base;
     @include button-style($color: auto);
 
-    // Styles and sizes
+    // Sizes
     @each $size, $button-size in map-remove($button-sizes, default) {
       &.#{$size} {
         @each $property, $value in $button-size {
