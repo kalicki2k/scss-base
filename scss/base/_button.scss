@@ -134,6 +134,7 @@ $button-opacity-disabled: .25 !default;
   border: 1px solid $color;
   color: $color;
 
+  &.active:not(.disabled):not([disabled]),
   &:hover:not(.disabled):not([disabled]),
   &:focus:not(.disabled):not([disabled]) {
 

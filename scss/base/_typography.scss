@@ -345,8 +345,8 @@ $keystroke-radius: $base-radius !default;
     line-height: inherit;
     text-decoration: $anchor-text-decoration;
 
-    &:hover:not(.disabled):not([disabled]),
-    &:focus:not(.disabled):not([disabled]) {
+    &:hover,
+    &:focus {
       color: $anchor-color-hover;
       @if $anchor-text-decoration-hover != $anchor-text-decoration {
         text-decoration: $anchor-text-decoration-hover;
