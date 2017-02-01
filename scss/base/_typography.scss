@@ -35,7 +35,7 @@ $header-font-style: normal !default;
 
 /// Font weight of headers.
 ///
-/// @type String
+/// @type Keyword | Number
 $header-font-weight: $base-font-weight-normal !default;
 
 /// Styles for headings at various screen sizes. Each key is a breakpoint, and each value is a map of heading styles.
@@ -156,7 +156,7 @@ $definition-list-margin-bottom: 1rem !default;
 
 /// Font weight for `<dt>` elements.
 ///
-/// @type String
+/// @type Keyword | Number
 $definition-list-term-weight: $base-font-weight-bold !default;
 
 /// Spacing between `<dt>` and `<dd>` elements.
@@ -211,7 +211,7 @@ $code-font-family: $base-font-family-monospace !default;
 
 /// Font weight of text in code samples.
 ///
-/// @type String
+/// @type Keyword | Number
 $code-font-weight: $base-font-weight-normal !default;
 
 /// Background color of code samples.
