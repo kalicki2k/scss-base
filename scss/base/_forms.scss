@@ -18,20 +18,10 @@ $input-background: $white !default;
 /// @type Color
 $input-background-focus: $white !default;
 
-/// Background color of disabled text inputs.
-///
-/// @type Color
-$input-background-disabled: $grey !default;
-
 /// Font color of text inputs.
 ///
 /// @type Color
 $input-color: $black !default;
-
-/// Cursor to use when hovering over a disabled text input.
-///
-/// @type Cursor
-$input-cursor-disabled: not-allowed !default;
 
 /// Border around text inputs.
 ///
@@ -60,7 +50,7 @@ $input-font-size: rem-calc(16) !default;
 
 /// Font weight of text inputs.
 ///
-/// @type Keyword
+/// @type Keyword | Number
 $input-font-weight: $base-font-weight-normal !default;
 
 /// Box shadow inside text inputs when not focused.
@@ -82,6 +72,19 @@ $input-transition: border-color .2s ease-in-out !default;
 ///
 /// @type Color
 $input-placeholder-color: $grey !default;
+
+/// Background color of disabled text inputs.
+///
+/// @type Color
+$input-background-disabled: $grey !default;
+
+/// Cursor to use when hovering over a disabled text input.
+///
+/// @type Cursor
+$input-cursor-disabled: not-allowed !default;
+
+// @todo
+$input-opacity-disabled: $base-opacity-disabled !default;
 
 /// Background color for select menus.
 ///
@@ -110,7 +113,7 @@ $form-label-font-size: rem-calc(14) !default;
 
 /// Font weight for form labels.
 ///
-/// @type Keyword
+/// @type Keyword | Number
 $form-label-font-weight: $base-font-weight-normal !default;
 
 /// Line height for form labels. The higher the number, the more space between the label and its input field.
@@ -118,20 +121,45 @@ $form-label-font-weight: $base-font-weight-normal !default;
 /// @type Number
 $form-label-line-height: 1.8 !default;
 
-/// Default color for help text.
+/// Color for help text.
 ///
 /// @type Color
 $help-text-color: $black !default;
 
-/// Default font size for help text.
+/// Font size for help text.
 ///
 /// @type Number
 $help-text-font-size: rem-calc(13) !default;
 
-/// Default font style for help text.
+/// Font style for help text.
 ///
 /// @type Keyword
 $help-text-font-style: italic !default;
+
+/// Font weight for help text.
+///
+/// @type Keyword | Number
+$help-text-font-weight: $base-font-weight-normal !default;
+
+/// Color for error text.
+///
+/// @type Color
+$error-text-color: $danger-color !default;
+
+/// Font size for error text.
+///
+/// @type Number
+$error-text-font-size: rem-calc(13) !default;
+
+/// Font style for error text.
+///
+/// @type Keyword
+$error-text-font-style: italic !default;
+
+/// Font weight for error text.
+///
+/// @type Keyword | Number
+$error-text-font-weight: $base-font-weight-normal !default;
 
 /// Adds a downward-facing triangle as a background image to an element. The image is formatted as an SVG, making it easy to change the color. Because Internet Explorer doesn't support encoded SVGs as background images, a PNG fallback is also included.
 /// There are two PNG fallbacks: a black triangle and a white triangle. The one used depends on the lightness of the input color.
@@ -172,26 +200,11 @@ $help-text-font-style: italic !default;
     }
   }
 
-  [type="text"],
-  [type="password"],
-  [type="date"],
-  [type="datetime"],
-  [type="datetime-local"],
-  [type="month"],
-  [type="week"],
-  [type="email"],
-  [type="number"],
-  [type="search"],
-  [type="tel"],
-  [type="time"],
-  [type="url"],
-  [type="color"],
-  textarea {
+  %form-input-base {
     background-color: $input-background;
     border: $input-border;
     border-radius: $input-radius;
     box-shadow: $input-shadow;
-    box-sizing: border-box;
     color: $input-color;
     display: block;
     font: {
@@ -207,17 +220,41 @@ $help-text-font-style: italic !default;
     @if has-value($input-transition) {
       transition: $input-transition;
     }
+  }
+
+  %form-input-focus {
+    background-color: $input-background-focus;
+    border: $input-border-focus;
+    box-shadow: $input-shadow-focus;
+    outline: none;
+  }
+
+  %form-input-disabled {
+    background-color: $input-background-disabled;
+    cursor: $input-cursor-disabled;
+    opacity: $input-opacity-disabled;
+  }
+
+  [type="text"],
+  [type="password"],
+  [type="date"],
+  [type="datetime"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="week"],
+  [type="email"],
+  [type="number"],
+  [type="search"],
+  [type="tel"],
+  [type="time"],
+  [type="url"],
+  [type="color"],
+  textarea {
+    @extend %form-input-base;
 
     // Focus state
     &:focus {
-      background-color: $input-background-focus;
-      border: $input-border-focus;
-      box-shadow: $input-shadow-focus;
-      outline: none;
-
-      @if has-value($input-transition) {
-        transition: $input-transition;
-      }
+      @extend %form-input-focus;
     }
 
     // Placeholder text
@@ -228,8 +265,8 @@ $help-text-font-style: italic !default;
     // Disabled/readonly state
     &:disabled,
     &[readonly] {
-      background-color: $input-background-disabled;
-      cursor: $input-cursor-disabled;
+      @extend %form-input-disabled;
+      user-select: none;
     }
   }
 
@@ -239,18 +276,8 @@ $help-text-font-style: italic !default;
   }
 
   select {
-    height: ($input-font-size + ($form-spacing * 1.5) - rem-calc(1));
-    margin: 0 0 $form-spacing;
-    padding: ($form-spacing / 2);
+    @extend %form-input-base;
     appearance: none;
-    border: $input-border;
-    border-radius: $select-radius;
-    background-color: $select-background;
-    font-family: $input-font-family;
-    font-size: $input-font-size;
-    line-height: normal;
-    color: $input-color;
-    width: 100%;
 
     @if $select-triangle-color != transparent {
       @include background-triangle($select-triangle-color);
@@ -263,20 +290,12 @@ $help-text-font-style: italic !default;
     }
 
     &:focus {
-      outline: none;
-      border: $input-border-focus;
-      background-color: $input-background-focus;
-      box-shadow: $input-shadow-focus;
-
-      @if has-value($input-transition) {
-        transition: $input-transition;
-      }
+      @extend %form-input-focus;
     }
 
     // Disabled state
     &:disabled {
-      background-color: $input-background-disabled;
-      cursor: $input-cursor-disabled;
+      @extend %form-input-disabled;
     }
 
     // Hide the dropdown arrow shown in newer IE versions
@@ -333,19 +352,60 @@ $help-text-font-style: italic !default;
 
   // Help text
   .help-text {
-    margin-top: ($form-spacing * 0.5) * -1;
-    font-size: $help-text-font-size;
-    font-style: $help-text-font-style;
     color: $help-text-color;
+    display: block;
+    font: {
+      size: $help-text-font-size;
+      style: $help-text-font-style;
+      weight: $help-text-font-weight;
+    }
+    margin-top: $form-spacing * -1;
   }
 
-  .success,
-  .success > .help-text {
-    color: $success-color;
+  // Error styles for help / hint text.
+  .error-text {
+    color: $error-text-color;
+    display: none;
+    font: {
+      size: $error-text-font-size;
+      style: $error-text-font-style;
+      weight: $error-text-font-weight;
+    }
   }
 
-  .danger,
-  .danger > .help-text {
-    color: $danger-color;
+  .error {
+    color: $error-text-color;
+
+    // Error styles for invalid form element.
+    [type="text"],
+    [type="password"],
+    [type="date"],
+    [type="datetime"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="week"],
+    [type="email"],
+    [type="number"],
+    [type="search"],
+    [type="tel"],
+    [type="time"],
+    [type="url"],
+    [type="color"],
+    textarea {
+      border-color: $error-text-color;
+      margin-bottom: 0;
+
+      &::placeholder {
+        color: $error-text-color;
+      }
+    }
+
+    .help-text {
+      display: none;
+    }
+
+    .error-text {
+      display: block;
+    }
   }
 }
