@@ -69,7 +69,7 @@ $button-transition: background-color 0.25s ease-out, color 0.25s ease-out !defau
 /// Opacity for a disabled button.
 ///
 /// @type List
-$button-opacity-disabled: .25 !default;
+$button-opacity-disabled: $base-opacity-disabled !default;
 
 /// Sets default style of a button.
 @mixin button-base {

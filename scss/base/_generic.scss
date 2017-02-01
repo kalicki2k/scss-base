@@ -68,6 +68,9 @@ $base-margin: rem-calc(16) !default;
 /// @type Number
 $base-radius: 3px !default;
 
+/// @todo
+$base-opacity-disabled: .25 !default;
+
 /// Sets the text direction of the CSS. Can be either `ltr` or `rtl`.
 ///
 /// @type Keyword
