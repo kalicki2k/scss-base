@@ -82,43 +82,52 @@ $base-right: if($base-text-direction == rtl, left, right);
 
 @mixin generic() {
 
-    // Set box-sizing globally to handle padding and border widths
-    *,
-    *::before,
-    *::after {
-        box-sizing: inherit;
-    }
+  // Set box-sizing globally to handle padding and border widths
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
 
-    html {
-        box-sizing: border-box;
-        font-size: $base-font-size;
-        text-rendering: optimizeLegibility
-    }
+  html {
+    box-sizing: border-box;
+    font-size: $base-font-size;
+    text-rendering: optimizeLegibility
+  }
 
-    // Default body styles
-    body {
-        background: $base-background;
-        color: $base-font-color;
-        font-family: $base-font-family;
-        font-weight: $base-font-weight-normal;
-        line-height: $base-line-height;
-        margin: 0;
-        padding: 0;
-        text-rendering: $base-text-rendering;
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-font-smoothing: antialiased;
-    }
+  // Default body styles
+  body {
+    background: $base-background;
+    color: $base-font-color;
+    font-family: $base-font-family;
+    font-weight: $base-font-weight-normal;
+    line-height: $base-line-height;
+    margin: 0;
+    padding: 0;
+    text-rendering: $base-text-rendering;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    img {
-        border: 0;
+  img {
+    border: 0;
 
-        // Get rid of gap under images by making them display: inline-block; by default
-        display: inline-block;
-        vertical-align: middle;
+    // Get rid of gap under images by making them display: inline-block; by default
+    display: inline-block;
+    vertical-align: middle;
 
-        // Grid defaults to get images and embeds to work properly
-        height: auto;
-        max-width: 100%;
-        -ms-interpolation-mode: bicubic;
-    }
+    // Grid defaults to get images and embeds to work properly
+    height: auto;
+    max-width: 100%;
+    -ms-interpolation-mode: bicubic;
+  }
+
+  // Helper classes
+  .no-margin {
+    margin: 0 !important;
+  }
+
+  .no-padding {
+    padding: 0 !important;
+  }
 }
