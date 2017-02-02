@@ -493,4 +493,9 @@ $keystroke-radius: $base-radius !default;
       }
     }
   }
+
+  // Text helper classes
+  .no-wrap {
+    white-space: nowrap;
+  }
 }
