@@ -161,6 +161,11 @@ $error-text-font-style: italic !default;
 /// @type Keyword | Number
 $error-text-font-weight: $base-font-weight-normal !default;
 
+/// Font style for success text.
+///
+/// @type Color
+$success-text-color: $success-color !default;
+
 /// Adds a downward-facing triangle as a background image to an element. The image is formatted as an SVG, making it easy to change the color. Because Internet Explorer doesn't support encoded SVGs as background images, a PNG fallback is also included.
 /// There are two PNG fallbacks: a black triangle and a white triangle. The one used depends on the lightness of the input color.
 ///
@@ -377,7 +382,6 @@ $error-text-font-weight: $base-font-weight-normal !default;
   .error {
     color: $error-text-color;
 
-    // Error styles for invalid form element.
     [type="text"],
     [type="password"],
     [type="date"],
@@ -401,11 +405,37 @@ $error-text-font-weight: $base-font-weight-normal !default;
     }
 
     .help-text {
-      display: none;
+      color: inherit;
     }
 
     .error-text {
       display: block;
+    }
+  }
+
+  .success {
+    color: $success-text-color;
+
+    [type="text"],
+    [type="password"],
+    [type="date"],
+    [type="datetime"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="week"],
+    [type="email"],
+    [type="number"],
+    [type="search"],
+    [type="tel"],
+    [type="time"],
+    [type="url"],
+    [type="color"],
+    textarea {
+      border-color: $success-text-color;
+    }
+
+    .help-text {
+      color: inherit;
     }
   }
 }
