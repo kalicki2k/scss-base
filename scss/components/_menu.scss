@@ -16,12 +16,12 @@ $menu-item-padding: rem-calc(11 16) !default;
 /// Text color of a menu item.
 ///
 /// @type Color
-$menu-item-color: $black !default;
+$menu-item-color: $primary-color !default;
 
 /// Text color of a hover menu item.
 ///
 /// @type Color
-$menu-item-color-hover: $black !default;
+$menu-item-color-hover: scale-color($primary-color, $lightness: -15%) !default;
 
 /// Background color of a hover menu item.
 ///
