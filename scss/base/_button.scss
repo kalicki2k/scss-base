@@ -121,10 +121,18 @@ $button-opacity-disabled: $base-opacity-disabled !default;
   background-color: $background;
   color: $color;
 
-  &.active:not(.disabled):not([disabled]),
-  &:hover:not(.disabled):not([disabled]),
-  &:focus:not(.disabled):not([disabled]) {
+  // Hover / Active state
+  &.active,
+  &:hover,
+  &:focus {
     background-color: $background-hover;
+    color: $color;
+  }
+
+  // Disabled state
+  &.disabled,
+  &[disabled] {
+    background-color: $background;
     color: $color;
   }
 }
@@ -135,21 +143,28 @@ $button-opacity-disabled: $base-opacity-disabled !default;
   $color-hover: $button-background-hover,
   $background-hover-lightness: $button-background-hover-lightness
 ) {
+  @if $color-hover == auto {
+    $color-hover: scale-color($color, $lightness: $background-hover-lightness);
+  }
+
   background-color: transparent;
   border: 1px solid $color;
   color: $color;
 
-  &.active:not(.disabled):not([disabled]),
-  &:hover:not(.disabled):not([disabled]),
-  &:focus:not(.disabled):not([disabled]) {
-
-    @if $color-hover == auto {
-      $color-hover: scale-color($color, $lightness: $background-hover-lightness);
-    }
-
+  // Hover / Active state
+  &.active,
+  &:hover,
+  &:focus {
     background-color: transparent;
     border: 1px solid $color-hover;
     color: $color-hover;
+  }
+
+  // Disabled state
+  &.disabled,
+  &[disabled] {
+    border: 1px solid $color;
+    color: $color;
   }
 }
 
