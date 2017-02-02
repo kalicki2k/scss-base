@@ -371,6 +371,7 @@ $error-text-font-weight: $base-font-weight-normal !default;
       style: $error-text-font-style;
       weight: $error-text-font-weight;
     }
+    margin-top: $form-spacing * -1;
   }
 
   .error {
@@ -393,7 +394,6 @@ $error-text-font-weight: $base-font-weight-normal !default;
     [type="color"],
     textarea {
       border-color: $error-text-color;
-      margin-bottom: 0;
 
       &::placeholder {
         color: $error-text-color;
