@@ -166,6 +166,27 @@ $error-text-font-weight: $base-font-weight-normal !default;
 /// @type Color
 $success-text-color: $success-color !default;
 
+/// @type Number
+$toggle-label-gutter: rem-calc(65) !default;
+
+///
+$toggle-background: $grey !default;
+
+///
+$toggle-background-checked: $primary-color !default;
+
+/// @type Number
+$toggle-height: rem-calc(25);
+
+/// @type Number
+$toggle-width: rem-calc(60);
+
+///
+$toggle-transition: background .3s ease, left .3s ease !default;
+
+///
+$toggle-circle-background: linear-gradient(transparent,rgba($black, .05)) $white !default;
+
 /// Adds a downward-facing triangle as a background image to an element. The image is formatted as an SVG, making it easy to change the color. Because Internet Explorer doesn't support encoded SVGs as background images, a PNG fallback is also included.
 /// There are two PNG fallbacks: a black triangle and a white triangle. The one used depends on the lightness of the input color.
 ///
@@ -342,9 +363,62 @@ $success-text-color: $success-color !default;
   }
 
   // Submit
-
   [type="submit"] {
     @include button-style($primary-color, auto, auto);
+  }
+
+  // Checkbox toggle
+  .toggle {
+    display: none;
+
+    + label {
+      cursor: pointer;
+      position: relative;
+      padding-left: $toggle-label-gutter;
+      margin: 0 0 $form-spacing;
+
+      &::before {
+        background: $grey;
+        border-radius: rem-calc(1000);
+        content: '';
+        display: block;
+        height: $toggle-height;
+        left: 0;
+        position: absolute;
+        top: 0;
+        transition: $toggle-transition;
+        width: $toggle-width;
+        z-index: 1;
+      }
+
+      &::after {
+        background: $toggle-circle-background;
+        border-radius: rem-calc(500);
+        content: '';
+        display: block;
+        height: $toggle-height;
+        left: 0;
+        position: absolute;
+        top: 0;
+        transition: $toggle-transition;
+        width: $toggle-height;
+        z-index: 2;
+      }
+    }
+
+    &:checked {
+
+      + label {
+
+        &::before {
+          background-color: $toggle-background-checked;
+        }
+
+        &::after {
+          left: $toggle-width - $toggle-height;
+        }
+      }
+    }
   }
 
   // Input group
