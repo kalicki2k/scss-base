@@ -1,0 +1,8 @@
+@mixin beforeafter(
+  $display: block,
+  $position: absolute,
+  $content: '') {
+  content: $content;
+  display: $display;
+  position: $position;
+}
