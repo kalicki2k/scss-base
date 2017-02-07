@@ -1,0 +1,108 @@
+/// Background color of a modal.
+///
+/// @type Color
+$modal-background: $white !default;
+
+/// Border around a modal.
+///
+/// @type Number
+$modal-border: 1px solid $grey !default;
+
+/// Size for buttons
+///
+/// @type Map
+$modal-sizes: (
+  small: (
+    width: 40%
+  ),
+  default: (
+    width: 50%
+
+  ),
+  medium: (
+    width: 60%
+  ),
+  large: (
+    width: 90%
+  )
+) !default;
+
+/// Radius for modal.
+///
+/// @type Number
+$modal-radius: $base-radius !default;
+
+/// Padding inside a modal.
+///
+/// @type Number
+$modal-padding: rem-calc(16) !default;
+
+/// Z-index for modals. The overlay uses this value, while the modal itself uses this value plus one.
+///
+/// @type Number
+$modal-z-index: 1000 !default;
+
+/// Background color of modal overlays.
+///
+/// @type Color
+$modal-overlay-background: rgba($black, .85) !default;
+
+@mixin modal() {
+
+  body.is-modal-open {
+    min-height: 100%;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  .modal-overlay {
+    align-items: center;
+    background-color: $modal-overlay-background;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    overflow-y: scroll;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: $modal-z-index;
+
+  }
+
+  .modal {
+    background-color: $modal-background;
+    border: $modal-border;
+    border-radius: $modal-radius;
+    padding: $modal-padding;
+    position: relative;
+    z-index: $modal-z-index + 1;
+
+    @include breakpoint-only(small) {
+      height: 100vh;
+      min-height: 100vh;
+      width: 100vw;
+      min-width: 100vw;
+    }
+
+    @include breakpoint-up(medium){
+      @each $property, $value in map-get($modal-sizes, default) {
+        #{$property}: $value;
+      }
+    }
+
+    // Collapsing
+    &.collapse {
+      padding: 0;
+    }
+
+    // Sizing
+    @each $size, $modal-size in map-remove($modal-sizes, default) {
+      &.#{$size} {
+        @each $property, $value in $modal-size {
+          #{$property}: $value;
+        }
+      }
+    }
+  }
+}
