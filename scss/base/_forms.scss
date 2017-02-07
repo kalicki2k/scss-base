@@ -99,7 +99,8 @@ $select-triangle-color: $grey !default;
 /// Default radius for select menus.
 ///
 /// @type Color
-$select-radius: $base-radius !default;
+// @todo Can be removed, maybe. Because we should use same radius value everywhere.
+$select-radius: $input-radius !default;
 
 /// Color for form labels.
 ///
@@ -191,7 +192,7 @@ $toggle-button-height: $toggle-height * $toggle-button-factor !default;
 $toggle-button-width: $toggle-button-height !default;
 
 ///
-$toggle-button-background: linear-gradient(transparent,rgba($black, .05)) $white !default;
+$toggle-button-background: linear-gradient(transparent, rgba($black, .05)) $white !default;
 
 ///
 $toggle-transition: background .2s ease-in, left .2s ease-in !default;
@@ -202,7 +203,24 @@ $toggle-transition: background .2s ease-in, left .2s ease-in !default;
 /// @param {Color} $color [$black] - Color to use for the triangle.
 @mixin background-triangle($color: $black) {
   $rgb: 'rgb%28#{round(red($color))}, #{round(green($color))}, #{round(blue($color))}%29';
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: #{$rgb}'></polygon></svg>");
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="24" viewBox="0 0 32 24"><polygon points="0,0 32,0 16,24" style="fill: #{$rgb}"></polygon></svg>');
+}
+
+@mixin background-check($color: $black) {
+  $rgb: 'rgb%28#{round(red($color))}, #{round(green($color))}, #{round(blue($color))}%29';
+  background-image: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 15 15" style="enable-background:new 0 0 15 15;" xml:space="preserve">
+<path d="M5.8,11.5c-0.2,0-0.4-0.1-0.6-0.3L2.3,8.4C1.9,8,1.9,7.5,2.3,7.1c0.3-0.3,0.9-0.3,1.2,0l2.3,2.3l5.7-5.7
+	c0.3-0.3,0.9-0.3,1.2,0c0.3,0.3,0.3,0.9,0,1.2l-6.3,6.3C6.2,11.5,6,11.5,5.8,11.5z" style="fill: #{$rgb}"/>
+</svg>');
+}
+
+@mixin background-dot($color: $black) {
+  $rgb: 'rgb%28#{round(red($color))}, #{round(green($color))}, #{round(blue($color))}%29';
+  background-image: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 15 15" style="enable-background:new 0 0 15 15;" xml:space="preserve">
+	<circle class="st0" cx="7.5" cy="7.5" r="3.5" style="fill: #{$rgb}"/>
+</svg>');
 }
 
 @mixin forms() {
@@ -229,7 +247,6 @@ $toggle-transition: background .2s ease-in, left .2s ease-in !default;
 
     &.middle {
       $input-border-width: get-value($input-border, width);
-
       margin: 0 0 $form-spacing;
       padding: ($form-spacing / 2 + rem-calc($input-border-width)) 0;
     }
@@ -320,7 +337,6 @@ $toggle-transition: background .2s ease-in, left .2s ease-in !default;
       background-position: $base-right (-$form-spacing) center;
       background-repeat: no-repeat;
       background-size: 9px 6px;
-
       padding-#{$base-right}: ($form-spacing * 1.5);
     }
 
@@ -345,29 +361,138 @@ $toggle-transition: background .2s ease-in, left .2s ease-in !default;
     }
   }
 
-  [type='file'],
+  /*[type='file'],
   [type='checkbox'],
   [type='radio'] {
     margin: 0 0 $form-spacing;
-  }
-
-  // Checkbox style
-  [type='checkbox'] {
-
-  }
+  }*/
 
   // Styles for input/label siblings
   [type='checkbox'] + label,
   [type='radio'] + label {
+    display: inline-flex;
+    margin: 0 0 $form-spacing;
+
+    &[for] {
+      cursor: pointer;
+    }
+  }
+  /*[type='checkbox'] + label,
+  [type='radio'] + label {
     display: inline-block;
     vertical-align: baseline;
-
     margin-#{$base-left}: $form-spacing * 0.5;
     margin-#{$base-right}: $form-spacing;
     margin-bottom: 0;
 
     &[for] {
       cursor: pointer;
+    }
+  }*/
+
+  // Checkbox style
+  [type='checkbox'] {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+
+    + label {
+      align-items: baseline;
+      flex-direction: row;
+      margin-right: $form-spacing;
+
+      &:empty,
+      &:empty::before {
+        margin-right: 0;
+      }
+
+      &::before {
+        background: {
+          color: $input-background;
+          repeat: no-repeat;
+          size: rem-calc(15 15);
+          position: center center;
+        }
+        content: '';
+        display: inline-flex;
+        min-width: rem-calc(15);
+        min-height: rem-calc(15);
+        border-radius: $input-radius;
+        border: $input-border;
+        margin-right: $form-spacing / 2;
+      }
+    }
+
+    //&:focus {
+    //
+    //  + label {
+    //
+    //    &:before {
+    //      border: $input-border-focus;
+    //    }
+    //  }
+    //}
+
+    &:checked {
+
+      + label {
+
+        &:before {
+          @include background-check($color: $primary-color);
+        }
+      }
+    }
+  }
+
+  // Radio style
+  [type='radio'] {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+
+    + label {
+      align-items: baseline;
+      flex-direction: row;
+      margin-right: $form-spacing;
+
+      &:empty,
+      &:empty::before {
+        margin-right: 0;
+      }
+
+      &::before {
+        background: {
+          color: $input-background;
+          repeat: no-repeat;
+          size: rem-calc(15 15);
+          position: center center;
+        }
+        content: '';
+        display: inline-flex;
+        min-width: rem-calc(15);
+        min-height: rem-calc(15);
+        border-radius: rem-calc(500);
+        border: $input-border;
+        margin-right: $form-spacing / 2;
+      }
+    }
+
+    //&:focus {
+    //
+    //  + label {
+    //
+    //    &:before {
+    //      border: $input-border-focus;
+    //    }
+    //  }
+    //}
+
+    &:checked {
+
+      + label {
+
+        &:before {
+          @include background-dot($color: $primary-color);
+        }
+      }
     }
   }
 
@@ -384,7 +509,7 @@ $toggle-transition: background .2s ease-in, left .2s ease-in !default;
   // Checkbox toggle
   .toggle {
     position: absolute;
-    clip: rect(0 , 0, 0, 0);
+    clip: rect(0, 0, 0, 0);
 
     + label {
       align-items: center;
@@ -403,6 +528,7 @@ $toggle-transition: background .2s ease-in, left .2s ease-in !default;
 
       &::before {
         background: $grey;
+        border: none;
         border-radius: rem-calc(1000);
         height: $toggle-height;
         left: 0;
@@ -422,22 +548,25 @@ $toggle-transition: background .2s ease-in, left .2s ease-in !default;
       }
     }
 
-    &:focus {
-
-      +label {
-
-        &::after {
-          border: $input-border-focus;
-        }
-      }
-    }
+    //&:focus {
+    //
+    //  + label {
+    //
+    //    &::after {
+    //      border: $input-border-focus;
+    //    }
+    //  }
+    //}
 
     &:checked {
 
       + label {
 
         &::before {
-          background-color: $toggle-background-checked;
+          background: {
+            color: $toggle-background-checked;
+            image: none;
+          }
         }
 
         &::after {
