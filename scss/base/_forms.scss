@@ -89,7 +89,7 @@ $input-opacity-disabled: $base-opacity-disabled !default;
 /// Background color for select menus.
 ///
 /// @type Color
-$select-background: $white !default;
+$select-background: $input-background !default;
 
 /// Color of the dropdown triangle inside select menus. Set to `transparent` to remove it entirely.
 ///
@@ -197,30 +197,67 @@ $toggle-button-background: linear-gradient(transparent, rgba($black, .05)) $whit
 ///
 $toggle-transition: background .2s ease-in, left .2s ease-in !default;
 
+$input-group-label-background: $grey !default;
+
+$input-group-label-padding: 0 $form-spacing !default;
+
 /// Adds a downward-facing triangle as a background image to an element. The image is formatted as an SVG, making it easy to change the color. Because Internet Explorer doesn't support encoded SVGs as background images, a PNG fallback is also included.
 /// There are two PNG fallbacks: a black triangle and a white triangle. The one used depends on the lightness of the input color.
 ///
 /// @param {Color} $color [$black] - Color to use for the triangle.
-@mixin background-triangle($color: $black) {
+@mixin background-triangle($color: $black, $background-color: $white) {
   $rgb: 'rgb%28#{round(red($color))}, #{round(green($color))}, #{round(blue($color))}%29';
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="24" viewBox="0 0 32 24"><polygon points="0,0 32,0 16,24" style="fill: #{$rgb}"></polygon></svg>');
+
+  // IE 10 fallback
+  @media screen and (min-width: 0\0) {
+    @if lightness($background-color) < 60% {
+      // white
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAMBJREFUeNrEllsOhCAMRVszC9IlzU7KCmVHTJsoMWYMUtpyv9BgbuXQB5ZSdgBYYY4ycgBivk8KYFsQMfMiTTBP4o3nUzCKzOabLJbLy2/g31evGkAginR4/ZegKH5qX3bJCscA3t0x3kgO5tQFyhhFf50xRqFLbyMUNJQzgyjGS/wgCpvKqkRBpuWrE4V9d+1E4dPUXqIg107SQOE/2DRQxMwTDygIInVDET9T3lCoj/6j/VCmGjZOl2lKpZ8AAwDQP7zIimDGFQAAAABJRU5ErkJggg==');
+    } @else {
+      // black
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAIpJREFUeNrEkckNgDAMBBfRkEt0ObRBBdsGXUDgmQfK4XhH2m8czQAAy27R3tsw4Qfe2x8uOO6oYLb6GlOor3GF+swURAOmUJ+RwtEJs9WvTGEYxBXqI1MQAZhCfUQKRzDMVj+TwrAIV6jvSUEkYAr1LSkcyTBb/V+KYfX7xAeusq3sLDtGH3kEGACPWIflNZfhRQAAAABJRU5ErkJggg==');
+    }
+  }
 }
 
-@mixin background-check($color: $black) {
+@mixin background-check($color: $black, $background-color: $white) {
   $rgb: 'rgb%28#{round(red($color))}, #{round(green($color))}, #{round(blue($color))}%29';
   background-image: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 15 15" style="enable-background:new 0 0 15 15;" xml:space="preserve">
 <path d="M5.8,11.5c-0.2,0-0.4-0.1-0.6-0.3L2.3,8.4C1.9,8,1.9,7.5,2.3,7.1c0.3-0.3,0.9-0.3,1.2,0l2.3,2.3l5.7-5.7
 	c0.3-0.3,0.9-0.3,1.2,0c0.3,0.3,0.3,0.9,0,1.2l-6.3,6.3C6.2,11.5,6,11.5,5.8,11.5z" style="fill: #{$rgb}"/>
 </svg>');
+
+  // IE 10 fallback
+  @media screen and (min-width: 0\0) {
+    @if lightness($background-color) < 60% {
+      // white
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFBJREFUeNpiYBj+4P///w1APJ8cjfP/I4AAuRoTsCkwAGIFcjQKQCXfgwwhWiOSwvPIBhCtEcn28/8xQQKxAYNuQAKpUSIAdXLAME2uAAEGANNAqxZOAQi8AAAAAElFTkSuQmCC');
+    } @else {
+      // black
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEtJREFUeNpiYBgRoAGI55OjEaTpPxQLkKsxAZsCAyBWIEejAFTyPdQQojXCwHk0A4jWCLP9PJIGojXiMiCB1CgRgDo5YJimVYAAAwCeOh6jC5lMXgAAAABJRU5ErkJggg==');
+    }
+  }
 }
 
-@mixin background-dot($color: $black) {
+@mixin background-dot($color: $black, $background-color: $white) {
   $rgb: 'rgb%28#{round(red($color))}, #{round(green($color))}, #{round(blue($color))}%29';
   background-image: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 15 15" style="enable-background:new 0 0 15 15;" xml:space="preserve">
 	<circle class="st0" cx="7.5" cy="7.5" r="3.5" style="fill: #{$rgb}"/>
 </svg>');
+
+  // IE 10 fallback
+  @media screen and (min-width: 0\0) {
+    @if lightness($background-color) < 60% {
+      // white
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAExJREFUeNpiYBiSgBGb4P///xWAVAKS0AJGRsYHBE0Dakz4jx0kENKo8B8/UEBWz4SmP4GAwxLwaSYJMFEt6En1M0WhTd14HhoAIMAAz2+EUbgsVFsAAAAASUVORK5CYII=');
+    } @else {
+      // black
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEZJREFUeNpiYBiSgBGHuAIQJyDxFwDxA2IMBGn6jwUnENKogEMjDCsgK2bCYishV+HUTBJgombok+RnikKb6vE8BABAgAEAxP0esRNNaxMAAAAASUVORK5CYII=');
+    }
+  }
 }
 
 @mixin forms() {
@@ -590,6 +627,57 @@ $toggle-transition: background .2s ease-in, left .2s ease-in !default;
     display: flex;
     width: 100%;
     margin-bottom: $form-spacing;
+
+    // Default / Reset  style for children.
+    %input-group-child {
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    > label {
+      @extend %input-group-child;
+      align-items: center;
+      background-color: $input-group-label-background;
+      display: flex;
+      padding: $input-group-label-padding;
+    }
+
+    > input {
+      @extend %input-group-child;
+      border-radius: 0;
+    }
+
+    > button,
+    > .button {
+      @extend %input-group-child;
+    }
+
+    > .button-group {
+      @extend %input-group-child;
+
+      > :first-child {
+        border-radius: 0;
+      }
+    }
+
+    > .dropdown {
+      display: flex;
+      align-items: stretch;
+
+      > button,
+      > .button {
+        @extend %input-group-child;
+        border-radius: 0 $input-radius $input-radius 0;
+      }
+    }
+
+    > :first-child {
+      border-radius: $input-radius 0 0 $input-radius;
+    }
+
+    > :last-child {
+      border-radius: 0 $input-radius $input-radius 0;
+    }
   }
 
   // Help text
@@ -633,7 +721,8 @@ $toggle-transition: background .2s ease-in, left .2s ease-in !default;
     [type="time"],
     [type="url"],
     [type="color"],
-    textarea {
+    textarea,
+    select {
       border-color: $error-text-color;
 
       &::placeholder {
@@ -667,7 +756,8 @@ $toggle-transition: background .2s ease-in, left .2s ease-in !default;
     [type="time"],
     [type="url"],
     [type="color"],
-    textarea {
+    textarea,
+    select {
       border-color: $success-text-color;
     }
 
