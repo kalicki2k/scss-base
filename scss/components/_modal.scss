@@ -47,6 +47,14 @@ $modal-z-index: 1000 !default;
 /// @type Color
 $modal-overlay-background: rgba($black, .85) !default;
 
+@mixin modal-fullscreen {
+  height: 100vh;
+  min-height: 100vh;
+  width: 100vw;
+  min-width: 100vw;
+}
+
+
 @mixin modal() {
 
   body.is-modal-open {
@@ -56,18 +64,16 @@ $modal-overlay-background: rgba($black, .85) !default;
   }
 
   .modal-overlay {
-    align-items: center;
     background-color: $modal-overlay-background;
     bottom: 0;
     display: flex;
-    justify-content: center;
     left: 0;
     overflow-y: scroll;
+    padding: rem-calc(30 0);
     position: fixed;
     right: 0;
     top: 0;
     z-index: $modal-z-index;
-
   }
 
   .modal {
@@ -78,17 +84,23 @@ $modal-overlay-background: rgba($black, .85) !default;
     position: relative;
     z-index: $modal-z-index + 1;
 
+
+
     @include breakpoint-only(small) {
-      height: 100vh;
-      min-height: 100vh;
-      width: 100vw;
-      min-width: 100vw;
+      @include modal-fullscreen;
     }
 
     @include breakpoint-up(medium){
       @each $property, $value in map-get($modal-sizes, default) {
         #{$property}: $value;
       }
+
+      margin: auto;
+      max-width: $base-width;
+    }
+
+    .full {
+      @include modal-fullscreen;
     }
 
     // Collapsing
