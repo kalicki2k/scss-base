@@ -18,7 +18,7 @@ $button-color: $white !default;
 /// @type List
 $button-color-alt: $black !default;
 
-/// Styles for buttons
+/// Size for buttons
 ///
 /// @type Map
 $button-sizes: (
@@ -175,13 +175,21 @@ $button-opacity-disabled: $base-opacity-disabled !default;
     @include button-base;
     @include button-style($color: auto);
 
-    // Sizes
+    // Sizing
     @each $size, $button-size in map-remove($button-sizes, default) {
       &.#{$size} {
         @each $property, $value in $button-size {
           #{$property}: $value;
         }
       }
+    }
+
+    // Expanded
+    &.expanded {
+      display: block;
+      width: 100%;
+      margin-right: 0;
+      margin-left: 0;
     }
 
     // Disabled state
