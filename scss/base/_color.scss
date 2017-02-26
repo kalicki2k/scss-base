@@ -21,7 +21,7 @@ $blue: #2185d0 !default;
 /// Color used for blue (eastern-blue) ui items.
 ///
 /// @type Color
-$eastern-blue: #259aa1;
+$eastern-blue: #259aa1 !default;
 
 /// Color used for red ui items.
 ///
@@ -33,6 +33,9 @@ $red: #c62828 !default;
 /// @type Color
 $yellow: #ffdd57 !default;
 
+/// Color used for green ui items.
+///
+/// @type Color
 $green: #21ba45 !default;
 
 /// Color used for primary ui items.
