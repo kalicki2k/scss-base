@@ -1,0 +1,13 @@
+@mixin sidebar() {
+    .sidebar-wrapper {
+        display: flex;
+
+        .sidebar {
+            flex: 0;
+        }
+
+        .sidebar-content {
+            flex: 1;
+        }
+    }
+}

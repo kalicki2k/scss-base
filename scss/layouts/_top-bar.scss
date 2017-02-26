@@ -1,0 +1,65 @@
+/// Padding for the top bar.
+///
+/// @type Number
+$top-bar-padding: rem(8) !default;
+
+/// Background color for the top bar. This color also cascades to menus within the top bar.
+///
+/// @type Color
+$top-bar-background: $grey !default;
+
+/// Spacing for the top bar title.
+///
+/// @type Number
+$top-bar-title-spacing: rem(16) !default;
+
+$top-bar-menu-item-background: $top-bar-background;
+$top-bar-menu-item-background-hover: $top-bar-background;
+$top-bar-menu-item-background-active: $primary-color;
+$top-bar-menu-item-color: $grey;
+$top-bar-menu-item-color-hover: $primary-color;
+$top-bar-menu-item-color-active: $white;
+$top-bar-menu-item-padding: rem-calc(23 16);
+$top-bar-menu-item-font-size: rem-calc(16);
+
+@mixin top-bar {
+  // todo: Missed menu and submenu styles for top bar.
+
+  .top-bar{
+    background-color: $top-bar-background;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    padding: $top-bar-padding;
+
+    // Overwrite menu component styles
+    .menu {
+
+      > li > a {
+        background: $top-bar-menu-item-background;
+        color: $top-bar-menu-item-color;
+        padding: $top-bar-menu-item-padding;
+      }
+
+      // Hover state
+      > li:not(.active) > a:hover {
+        background: $top-bar-menu-item-background-hover;
+        color: $top-bar-menu-item-color-hover;
+      }
+
+      // Active state
+      > li.active > a {
+        background: $top-bar-menu-item-background-active;
+        color: $top-bar-menu-item-color-active;
+      }
+    }
+
+    > .top-bar-title {
+      margin-right: $top-bar-title-spacing;
+    }
+
+    > .top-bar-right {
+      margin-left: auto;
+    }
+  }
+}

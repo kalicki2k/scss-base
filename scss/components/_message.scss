@@ -1,0 +1,53 @@
+/// @type Color
+$message-background: $grey !default;
+
+/// @type Number
+$message-background-fade: 95% !default;
+
+/// @type Keyword
+$message-border-style: solid !default;
+
+/// @type Number
+$message-border-width: 1px !default;
+
+/// @type Number
+$message-margin: 0 0 $base-margin !default;
+
+/// @type Number
+$message-padding: rem-calc(16) !default;
+
+/// @type Number
+$message-radius: $base-radius !default;
+
+@mixin message-base {
+  border-radius: $message-radius;
+  border-style: $message-border-style;
+  border-width: $message-border-width;
+  margin: $message-margin;
+  padding: $message-padding;
+}
+
+@mixin message-style($color: $message-background) {
+  background-color: scale_color($color, $lightness: $message-background-fade);
+  border-color: $color;
+  color: $color;
+}
+
+@mixin message {
+
+  .message {
+    @include message-base;
+    @include message-style;
+
+    // Colors
+    &.primary { @include message-style($primary-color); }
+
+    &.info { @include message-style($info-color); }
+
+    &.success { @include message-style($success-color); }
+
+    &.warning { @include message-style($warning-color); }
+
+    &.danger { @include message-style($danger-color); }
+  }
+}

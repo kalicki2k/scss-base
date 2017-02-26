@@ -25,16 +25,17 @@ $dropdown-radius: $base-radius !default;
 @mixin dropdown {
 
   .dropdown:not(.menu){
+    display: inline-block;
     position: relative;
 
-    > button,
-    > .button {
-
-      &:after {
-        @include icon-base;
-        content: '\e883';
-      }
-    }
+    //> button,
+    //> .button {
+    //
+    //  &:after {
+    //    @include icon-base;
+    //    content: '\e883';
+    //  }
+    //}
 
     > .dropdown-content {
       position: absolute;
@@ -60,16 +61,17 @@ $dropdown-radius: $base-radius !default;
     }
 
     &.is-active {
-      > button,
-      > .button {
-
-        &:after {
-          content: '\e886';
-        }
-      }
+      //> button,
+      //> .button {
+      //
+      //  &:after {
+      //    content: '\e886';
+      //  }
+      //}
 
       > .dropdown-content {
         display: block;
+        top: 100%;
 
         &.dropdown-right {
           right: 0;

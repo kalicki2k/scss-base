@@ -10,6 +10,6 @@
 var config = require('../config'),
 	gulp = require('gulp');
 
-gulp.task('watch', function (){
+gulp.task('watch', () => {
 	gulp.watch(config.sass.src, ['sass']);
 });

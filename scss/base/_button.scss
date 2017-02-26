@@ -10,25 +10,36 @@ $button-background-hover: scale-color($button-background, $lightness: -15%) !def
 
 /// Font color for buttons.
 ///
-/// @type List
+/// @type Color
 $button-color: $white !default;
 
 /// Alternative font color for buttons.
 ///
-/// @type List
+/// @type Color
 $button-color-alt: $black !default;
 
-/// Size for buttons
+/// Font size for default buttons.
+///
+/// @type Number
+$button-font-size: rem-calc(14) !default;
+
+/// Padding for default buttons.
+///
+/// @type Number
+$button-padding: rem-calc(10 12) !default;
+
+/// Line height for default buttons.
+///
+/// @type Number
+$button-line-height: 1.5 !default;
+
+/// Styles for buttons
 ///
 /// @type Map
 $button-sizes: (
   small: (
     font-size: rem-calc(12),
     padding: rem-calc(8 9)
-  ),
-  default: (
-    font-size: rem-calc(14),
-    padding: rem-calc(10 12)
   ),
   medium: (
     font-size: rem-calc(16),
@@ -78,25 +89,21 @@ $button-opacity-disabled: $base-opacity-disabled !default;
 
 /// Sets default style of a button.
 @mixin button-base {
-  $default: map-get($button-sizes, default);
-  display: inline-block;
-  vertical-align: middle;
-  margin: $button-margin;
-  -webkit-appearance: none;
   border: $button-border;
   border-radius: $button-radius;
-
-  @each $property, $value in map-get($button-sizes, default) {
-    #{$property}: $value;
-  }
+  cursor: pointer;
+  display: inline-block;
+  font-size: $button-font-size;
+  line-height: $button-line-height;
+  margin: $button-margin;
+  padding: $button-padding;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-appearance: none;
 
   @if has-value($button-transition) {
     transition: $button-transition;
   }
-
-  line-height: 1;
-  text-align: center;
-  cursor: pointer;
 }
 
 /// Sets the visual style of a button.
@@ -175,7 +182,7 @@ $button-opacity-disabled: $base-opacity-disabled !default;
     @include button-base;
     @include button-style($color: auto);
 
-    // Sizing
+    // Sizes
     @each $size, $button-size in map-remove($button-sizes, default) {
       &.#{$size} {
         @each $property, $value in $button-size {

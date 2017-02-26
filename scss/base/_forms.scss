@@ -53,6 +53,11 @@ $input-font-size: rem-calc(16) !default;
 /// @type Keyword | Number
 $input-font-weight: $base-font-weight-normal !default;
 
+/// Line height of text inputs.
+///
+/// @type Number
+$input-line-height: 1.5 !default;
+
 /// Box shadow inside text inputs when not focused.
 ///
 /// @type Shadow
@@ -170,10 +175,10 @@ $success-text-color: $success-color !default;
 /// @type Number
 $toggle-label-gutter: rem-calc(70) !default;
 
-///
+/// @type Color
 $toggle-background: $grey !default;
 
-///
+/// @type Color
 $toggle-background-checked: $primary-color !default;
 
 /// @type Number
@@ -191,10 +196,13 @@ $toggle-button-height: $toggle-height * $toggle-button-factor !default;
 /// @type Number
 $toggle-button-width: $toggle-button-height !default;
 
-///
+/// @type Color
 $toggle-button-background: linear-gradient(transparent, rgba($black, .05)) $white !default;
 
-///
+// @type Shadow
+$toggle-button-shadow: 0 0 2px 0 rgba($black, .25) !default;
+
+/// @type List
 $toggle-transition: background .2s ease-in, left .2s ease-in !default;
 
 $input-group-label-background: $grey !default;
@@ -260,6 +268,24 @@ $input-group-label-padding: 0 $form-spacing !default;
   }
 }
 
+@mixin background-minus($color: $black, $background-color: $white) {
+  $rgb: 'rgb%28#{round(red($color))}, #{round(green($color))}, #{round(blue($color))}%29';
+  background-image: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 15 15" style="enable-background:new 0 0 15 15;" xml:space="preserve">
+	<path d="M12.1,8.5H2.9C2.4,8.5,2,8.1,2,7.6V7.4c0-0.5,0.4-0.9,0.9-0.9h9.2c0.5,0,0.9,0.4,0.9,0.9v0.2 C13,8.1,12.6,8.5,12.1,8.5z" style="fill: #{$rgb}"/></svg>');
+
+  // IE 10 fallback
+  @media screen and (min-width: 0\0) {
+    @if lightness($background-color) < 60% {
+      // white
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADVJREFUeNpiYBgF9AOMMMb///8LgJQAEXo+MDIyTkDX/J9oG4EARLMgiRUSa/NohA0EAAgwAPkkCnh7pOmjAAAAAElFTkSuQmCC');
+    } @else {
+      // black
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACxJREFUeNpiYBgF9AOMSOwCIBYgQs8HIJ6Arvk/qZayIAkUkmDzKKA7AAgwAA6HBHg0lmpaAAAAAElFTkSuQmCC');
+    }
+  }
+}
+
 @mixin forms() {
 
   fieldset {
@@ -302,6 +328,7 @@ $input-group-label-padding: 0 $form-spacing !default;
       weight: $input-font-weight;
     }
     height: ($input-font-size + ($form-spacing * $base-line-height) - rem-calc(1));
+    line-height: $input-line-height;
     margin: 0 0 $form-spacing;
     padding: $form-spacing / 2;
     width: 100%;
@@ -427,60 +454,8 @@ $input-group-label-padding: 0 $form-spacing !default;
     }
   }*/
 
-  // Checkbox style
-  [type='checkbox'] {
-    position: absolute;
-    clip: rect(0, 0, 0, 0);
-
-    + label {
-      align-items: baseline;
-      flex-direction: row;
-      margin-right: $form-spacing;
-
-      &:empty,
-      &:empty::before {
-        margin-right: 0;
-      }
-
-      &::before {
-        background: {
-          color: $input-background;
-          repeat: no-repeat;
-          size: rem-calc(15 15);
-          position: center center;
-        }
-        content: '';
-        display: inline-flex;
-        min-width: rem-calc(15);
-        min-height: rem-calc(15);
-        border-radius: $input-radius;
-        border: $input-border;
-        margin-right: $form-spacing / 2;
-      }
-    }
-
-    //&:focus {
-    //
-    //  + label {
-    //
-    //    &:before {
-    //      border: $input-border-focus;
-    //    }
-    //  }
-    //}
-
-    &:checked {
-
-      + label {
-
-        &:before {
-          @include background-check($color: $primary-color);
-        }
-      }
-    }
-  }
-
-  // Radio style
+  // custom checkbox and radio styles
+  [type='checkbox'],
   [type='radio'] {
     position: absolute;
     clip: rect(0, 0, 0, 0);
@@ -489,6 +464,7 @@ $input-group-label-padding: 0 $form-spacing !default;
       align-items: baseline;
       flex-direction: row;
       margin-right: $form-spacing;
+      padding: $form-spacing / 2 0;
 
       &:empty,
       &:empty::before {
@@ -506,29 +482,45 @@ $input-group-label-padding: 0 $form-spacing !default;
         display: inline-flex;
         min-width: rem-calc(15);
         min-height: rem-calc(15);
-        border-radius: rem-calc(500);
         border: $input-border;
         margin-right: $form-spacing / 2;
       }
     }
+  }
 
-    //&:focus {
-    //
-    //  + label {
-    //
-    //    &:before {
-    //      border: $input-border-focus;
-    //    }
-    //  }
-    //}
+  // custom checkbox styles (different from shared style)
+  [type='checkbox'] {
 
-    &:checked {
+    + label::before {
+      border-radius: $input-radius;
+    }
 
-      + label {
+    &:checked + label {
 
-        &:before {
-          @include background-dot($color: $primary-color);
-        }
+      &:before {
+        @include background-check($color: $primary-color);
+      }
+    }
+
+    &:indeterminate + label {
+
+      &:before {
+        @include background-minus($color: $primary-color);
+      }
+    }
+  }
+
+  // custom radio styles (different from shared style)
+  [type='radio'] {
+
+    + label::before {
+      border-radius: 50%;
+    }
+
+    &:checked + label {
+
+      &:before {
+        @include background-dot($color: $primary-color);
       }
     }
   }
@@ -576,6 +568,7 @@ $input-group-label-padding: 0 $form-spacing !default;
       &::after {
         background: $toggle-button-background;
         border-radius: 50%;
+        box-shadow: $toggle-button-shadow;
         height: $toggle-button-height;
         left: $toggle-height * ((1 - $toggle-button-factor) / 2);
         top: 50%;
@@ -584,16 +577,6 @@ $input-group-label-padding: 0 $form-spacing !default;
         z-index: 2;
       }
     }
-
-    //&:focus {
-    //
-    //  + label {
-    //
-    //    &::after {
-    //      border: $input-border-focus;
-    //    }
-    //  }
-    //}
 
     &:checked {
 
@@ -730,10 +713,6 @@ $input-group-label-padding: 0 $form-spacing !default;
       }
     }
 
-    .help-text {
-      color: inherit;
-    }
-
     .error-text {
       display: block;
     }
@@ -761,7 +740,7 @@ $input-group-label-padding: 0 $form-spacing !default;
       border-color: $success-text-color;
     }
 
-    .help-text {
+    .success-text {
       color: inherit;
     }
   }

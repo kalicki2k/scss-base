@@ -7,9 +7,13 @@
  */
 
 module.exports = {
+	copy: {
+		src: 'src/**/*.{ttf,woff,eof,svg,png,jpg,tpl}',
+		dest: 'dev/',
+	},
 	sass: {
 		src: 'scss/**/*.s+(a|c)ss',
 		dev: 'css/',
-		autoprefixer: ['IE 10', '> 1%']
+		autoprefixer: ['IE 10', '> 1%'],
 	}
 };

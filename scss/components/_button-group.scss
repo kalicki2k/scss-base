@@ -10,7 +10,7 @@ $button-group-radius: $button-radius !default;
 
 @mixin button-group-base {
   align-items: stretch;
-  display: flex;
+  display: inline-flex;
   flex-wrap: nowrap;
   margin: $button-group-margin;
 
