@@ -58,6 +58,11 @@ $input-font-weight: $base-font-weight-normal !default;
 /// @type Number
 $input-line-height: 1.5 !default;
 
+/// Padding of text inputs.
+///
+/// @type Number
+$input-padding: $form-spacing / 2 !default;
+
 /// Box shadow inside text inputs when not focused.
 ///
 /// @type Shadow
@@ -88,7 +93,9 @@ $input-background-disabled: $grey !default;
 /// @type Cursor
 $input-cursor-disabled: not-allowed !default;
 
-// @todo
+// Opacity value of disabled text inputs.
+//
+// @type Number
 $input-opacity-disabled: $base-opacity-disabled !default;
 
 /// Background color for select menus.
@@ -311,7 +318,7 @@ $input-group-label-padding: 0 $form-spacing !default;
     &.middle {
       $input-border-width: get-value($input-border, width);
       margin: 0 0 $form-spacing;
-      padding: ($form-spacing / 2 + rem-calc($input-border-width)) 0;
+      padding: ($input-padding + rem-calc($input-border-width)) 0;
     }
   }
 
@@ -330,7 +337,7 @@ $input-group-label-padding: 0 $form-spacing !default;
     height: ($input-font-size + ($form-spacing * $base-line-height) - rem-calc(1));
     line-height: $input-line-height;
     margin: 0 0 $form-spacing;
-    padding: $form-spacing / 2;
+    padding: $input-padding;
     width: 100%;
 
     @if has-value($input-transition) {
@@ -421,50 +428,27 @@ $input-group-label-padding: 0 $form-spacing !default;
     &[multiple] {
       height: auto;
       background-image: none;
-      padding: ($form-spacing / 2);
+      padding: $input-padding;
     }
   }
-
-  /*[type='file'],
-  [type='checkbox'],
-  [type='radio'] {
-    margin: 0 0 $form-spacing;
-  }*/
-
-  // Styles for input/label siblings
-  [type='checkbox'] + label,
-  [type='radio'] + label {
-    display: inline-flex;
-    margin: 0 0 $form-spacing;
-
-    &[for] {
-      cursor: pointer;
-    }
-  }
-  /*[type='checkbox'] + label,
-  [type='radio'] + label {
-    display: inline-block;
-    vertical-align: baseline;
-    margin-#{$base-left}: $form-spacing * 0.5;
-    margin-#{$base-right}: $form-spacing;
-    margin-bottom: 0;
-
-    &[for] {
-      cursor: pointer;
-    }
-  }*/
 
   // custom checkbox and radio styles
   [type='checkbox'],
   [type='radio'] {
+    height: 0;
     position: absolute;
     clip: rect(0, 0, 0, 0);
 
     + label {
       align-items: baseline;
+      display: inline-flex;
       flex-direction: row;
-      margin-right: $form-spacing;
-      padding: $form-spacing / 2 0;
+      margin: 0 $form-spacing $form-spacing 0;
+      padding: $input-padding 0;
+
+      &[for] {
+        cursor: pointer;
+      }
 
       &:empty,
       &:empty::before {
@@ -484,6 +468,15 @@ $input-group-label-padding: 0 $form-spacing !default;
         min-height: rem-calc(15);
         border: $input-border;
         margin-right: $form-spacing / 2;
+      }
+    }
+
+    &:disabled + label {
+      @extend %form-input-disabled;
+      user-select: none;
+
+      &[for] {
+        cursor: default;
       }
     }
   }
@@ -537,14 +530,9 @@ $input-group-label-padding: 0 $form-spacing !default;
 
   // Checkbox toggle
   .toggle {
-    position: absolute;
-    clip: rect(0, 0, 0, 0);
 
     + label {
-      align-items: center;
       cursor: pointer;
-      display: flex;
-      flex-direction: row;
       position: relative;
       padding-left: $toggle-label-gutter;
       margin: 0 0 $form-spacing;
@@ -571,8 +559,9 @@ $input-group-label-padding: 0 $form-spacing !default;
         box-shadow: $toggle-button-shadow;
         height: $toggle-button-height;
         left: $toggle-height * ((1 - $toggle-button-factor) / 2);
-        top: 50%;
-        transform: translateY(-50%);
+        top: -($toggle-button-height / 2) + $input-padding + ($toggle-height / 2);
+        //top: 50%;
+        //transform: translateY(-50%);
         width: $toggle-button-width;
         z-index: 2;
       }
