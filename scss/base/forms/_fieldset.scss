@@ -1,0 +1,58 @@
+/// Default border around custom fieldsets.
+///
+/// @type Border
+$fieldset-border: 1px solid $grey !default;
+
+/// Default padding inside custom fieldsets.
+///
+/// @type Number
+$fieldset-padding: rem-calc(16) !default;
+
+/// Default margin around custom fieldsets.
+///
+/// @type Number
+$fieldset-margin: rem-calc(18 0) !default;
+
+/// Default padding between the legend text and fieldset border.
+///
+/// @type Number
+$fieldset-legend-padding: rem-calc(0 3) !default;
+
+/// Default margin below the legend text.
+///
+/// @type Number
+$fieldset-legend-margin: rem-calc(8) !default;
+
+@mixin fieldset-base(
+  $border: $fieldset-border,
+  $margin: $fieldset-margin,
+  $padding: $fieldset-padding
+) {
+  border: $border;
+  margin: $margin;
+  padding: $padding;
+
+  legend {
+    margin: 0;
+    margin-#{$base-left}: rem-calc(-3);
+    padding: $fieldset-legend-padding;
+    background: $base-background;
+  }
+}
+
+@mixin fieldset {
+  fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  legend {
+    max-width: 100%;
+    margin-bottom: $fieldset-legend-margin;
+  }
+
+  .fieldset {
+    @include fieldset-base;
+  }
+}

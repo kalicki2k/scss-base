@@ -3,11 +3,6 @@
 /// @type Number
 $form-spacing: $base-margin !default;
 
-/// Default padding between the legend text and fieldset border.
-///
-/// @type Number
-$legend-padding: rem-calc(0 3) !default;
-
 /// Background color of text inputs.
 ///
 /// @type Color
@@ -294,17 +289,6 @@ $input-group-label-padding: 0 $form-spacing !default;
 }
 
 @mixin forms() {
-
-  fieldset {
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
-
-  legend {
-    max-width: 100%;
-    margin-bottom: $form-spacing * 0.5;
-  }
 
   label {
     color: $form-label-color;
