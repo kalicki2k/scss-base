@@ -81,7 +81,7 @@ $input-placeholder-color: $grey !default;
 /// Background color of disabled text inputs.
 ///
 /// @type Color
-$input-background-disabled: $grey !default;
+$input-background-disabled: inherit !default;
 
 /// Cursor to use when hovering over a disabled text input.
 ///
@@ -220,7 +220,7 @@ $input-group-label-padding: 0 $form-spacing !default;
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="24" viewBox="0 0 32 24"><polygon points="0,0 32,0 16,24" style="fill: #{$rgb}"></polygon></svg>');
 
   // IE 10 fallback
-  @media screen and (min-width: 0\0) {
+  @media screen and (min-width: 0 \0) {
     @if lightness($background-color) < 60% {
       // white
       background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAMBJREFUeNrEllsOhCAMRVszC9IlzU7KCmVHTJsoMWYMUtpyv9BgbuXQB5ZSdgBYYY4ycgBivk8KYFsQMfMiTTBP4o3nUzCKzOabLJbLy2/g31evGkAginR4/ZegKH5qX3bJCscA3t0x3kgO5tQFyhhFf50xRqFLbyMUNJQzgyjGS/wgCpvKqkRBpuWrE4V9d+1E4dPUXqIg107SQOE/2DRQxMwTDygIInVDET9T3lCoj/6j/VCmGjZOl2lKpZ8AAwDQP7zIimDGFQAAAABJRU5ErkJggg==');
@@ -240,7 +240,7 @@ $input-group-label-padding: 0 $form-spacing !default;
 </svg>');
 
   // IE 10 fallback
-  @media screen and (min-width: 0\0) {
+  @media screen and (min-width: 0 \0) {
     @if lightness($background-color) < 60% {
       // white
       background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFBJREFUeNpiYBj+4P///w1APJ8cjfP/I4AAuRoTsCkwAGIFcjQKQCXfgwwhWiOSwvPIBhCtEcn28/8xQQKxAYNuQAKpUSIAdXLAME2uAAEGANNAqxZOAQi8AAAAAElFTkSuQmCC');
@@ -259,7 +259,7 @@ $input-group-label-padding: 0 $form-spacing !default;
 </svg>');
 
   // IE 10 fallback
-  @media screen and (min-width: 0\0) {
+  @media screen and (min-width: 0 \0) {
     @if lightness($background-color) < 60% {
       // white
       background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAExJREFUeNpiYBiSgBGb4P///xWAVAKS0AJGRsYHBE0Dakz4jx0kENKo8B8/UEBWz4SmP4GAwxLwaSYJMFEt6En1M0WhTd14HhoAIMAAz2+EUbgsVFsAAAAASUVORK5CYII=');
@@ -277,7 +277,7 @@ $input-group-label-padding: 0 $form-spacing !default;
 	<path d="M12.1,8.5H2.9C2.4,8.5,2,8.1,2,7.6V7.4c0-0.5,0.4-0.9,0.9-0.9h9.2c0.5,0,0.9,0.4,0.9,0.9v0.2 C13,8.1,12.6,8.5,12.1,8.5z" style="fill: #{$rgb}"/></svg>');
 
   // IE 10 fallback
-  @media screen and (min-width: 0\0) {
+  @media screen and (min-width: 0 \0) {
     @if lightness($background-color) < 60% {
       // white
       background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADVJREFUeNpiYBgF9AOMMMb///8LgJQAEXo+MDIyTkDX/J9oG4EARLMgiRUSa/NohA0EAAgwAPkkCnh7pOmjAAAAAElFTkSuQmCC');
@@ -649,8 +649,8 @@ $input-group-label-padding: 0 $form-spacing !default;
   }
 
   // Error styles for help / hint text.
-  .error-text {
-    color: $error-text-color;
+  .error-text,
+  .success-text {
     display: none;
     font: {
       size: $error-text-font-size;
@@ -715,6 +715,24 @@ $input-group-label-padding: 0 $form-spacing !default;
 
     .success-text {
       color: inherit;
+    }
+  }
+
+  %form-reset-no-margin {
+    margin-top: 0;
+  }
+
+  .error > .no-margin + .error-text,
+  .success > .no-margin + .success-text {
+    @extend %form-reset-no-margin;
+  }
+
+  @each $breakpoint in map-keys($breakpoints) {
+    @if $breakpoint != sl-first(map_keys($breakpoints)) {
+      .error > .#{$breakpoint}-.no-margin + .error-text,
+      .success > .#{$breakpoint}-.no-margin + .success-text {
+        @extend %form-reset-no-margin;
+      }
     }
   }
 }
