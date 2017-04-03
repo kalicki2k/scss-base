@@ -6,7 +6,7 @@ $top-bar-padding: 0 !default;
 /// Background color for the top bar. This color also cascades to menus within the top bar.
 ///
 /// @type Color
-$top-bar-background: mix($white, $black, 20%) !default;
+$top-bar-background:  scale-color($black, $lightness: 20%) !default;
 
 /// Text color for the top bar title.
 ///
@@ -36,7 +36,7 @@ $top-bar-menu-item-color: $white !default;
 /// Background color for a hover top bar menu item.
 ///
 /// @type Color
-$top-bar-menu-item-background-hover: mix($white, $black, 13.5%) !default;
+$top-bar-menu-item-background-hover: scale-color($black, $lightness: 13.5%) !default;
 
 /// Text color for a hover top bar menu item.
 ///
