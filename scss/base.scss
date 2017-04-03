@@ -12,6 +12,7 @@
 // Components
 @import 'base/base';
 @import 'components/components';
+@import 'layouts/layouts';
 
 // Includes
 @include generic;
@@ -28,3 +29,5 @@
 @include dropdown;
 @include dropdown-menu;
 @include table;
+
+@include top-bar;
