@@ -8,6 +8,11 @@ $top-bar-padding: 0 !default;
 /// @type Color
 $top-bar-background: mix($white, $black, 20%) !default;
 
+/// Text color for the top bar title.
+///
+/// @type Color
+$top-bar-title-color: $white !default;
+
 /// Font size for the top bar title.
 ///
 /// @type Keyword | Number
@@ -77,10 +82,12 @@ $top-bar-submenu-background: $top-bar-background !default;
 
 /// @todo Documentation needed...
 @mixin top-bar-title(
+  $color: $top-bar-title-color,
   $font-size: $top-bar-title-font-size,
   $font-weight: $top-bar-title-font-weight,
   $padding: $top-bar-title-padding
 ) {
+  color: $color;
   flex: 0 1 auto;
   font: {
     size: $font-size;
