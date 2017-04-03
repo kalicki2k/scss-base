@@ -53,16 +53,10 @@ $top-bar-menu-item-background-active: $primary-color !default;
 /// @type Color
 $top-bar-menu-item-color-active: $white !default;
 
-/// Background color submenus within the top bar. Useful if $top-bar-background is transparent.
-///
-/// @type Color
-$top-bar-submenu-background: $top-bar-background !default;
-
 /// @todo Documentation needed...
 @mixin top-bar-base(
   $padding: $top-bar-padding,
-  $background: $top-bar-background,
-  $submenu-background: $top-bar-submenu-background
+  $background: $top-bar-background
 ) {
   align-items: stretch;
   display: flex;
@@ -71,12 +65,6 @@ $top-bar-submenu-background: $top-bar-background !default;
   &,
   ul {
     background-color: $background;
-  }
-
-  @if ($background != $submenu-background) {
-    ul ul {
-      background-color: $submenu-background;
-    }
   }
 }
 
