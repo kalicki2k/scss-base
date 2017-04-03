@@ -124,6 +124,7 @@ $menu-item-background-active: $primary-color !default;
     &.active > a {
       background-color: $background-active;
       color: $color-active;
+      cursor: default;
     }
   }
 }
