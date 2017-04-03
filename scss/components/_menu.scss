@@ -39,17 +39,23 @@ $menu-item-color-active: $white !default;
 $menu-item-background-active: $primary-color !default;
 
 /// Creates the base styles for a Menu.
+///
+/// @param {Number} $margin [$menu-margin] -
+/// @param {Number} $item-padding [$menu-item-padding] -
 @mixin menu-base(
   $margin: $menu-margin,
   $item-padding: $menu-item-padding
 ) {
-  margin: $margin;
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
   list-style-type: none;
+  margin: $margin;
+  width: 100%;
 
   // List items are table cell to allow for vertical alignment
   > li {
-    display: table-cell;
-    vertical-align: middle;
+    flex: 0 0 auto;
 
     // Reset line height to make the height of the overall item easier to calculate
     > a {
@@ -61,12 +67,40 @@ $menu-item-background-active: $primary-color !default;
 
   // Reset styles of inner elements
   input,
+  select,
   a,
   button {
     margin-bottom: 0;
   }
 }
 
+/// Sets the direction for a Menu.
+/// @param {Keyword} $dir [horizontal] - Direction of the Menu can be `horizontal` or `vertical`.
+@mixin menu-direction($dir: horizontal) {
+  @if $dir == horizontal {
+    flex-wrap: nowrap;
+
+    > li {
+      flex: 0 0 auto;
+    }
+  } @else if $dir == vertical {
+    flex-wrap: wrap;
+
+    > li {
+      flex: 0 0 100%;
+      max-width: 100%;
+
+      > a {
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+    }
+  } @else {
+    @warn 'The direction used for menu-direction() must be horizontal or vertical.';
+  }
+}
+
+/// Sets the style for a Menu.
 @mixin menu-style(
   $color: $menu-item-color,
   $background-hover: $menu-item-background-hover,
@@ -91,22 +125,6 @@ $menu-item-background-active: $primary-color !default;
       background-color: $background-active;
       color: $color-active;
     }
-  }
-}
-
-/// Sets the direction of a Menu.
-/// @param {Keyword} $dir [horizontal] - Direction of the Menu can be `horizontal` or `vertical`.
-@mixin menu-direction($dir: horizontal) {
-  @if $dir == horizontal {
-    > li {
-      display: table-cell;
-    }
-  } @else if $dir == vertical {
-    > li {
-      display: block;
-    }
-  } @else {
-    @warn 'The direction used for menu-direction() must be horizontal or vertical.';
   }
 }
 
