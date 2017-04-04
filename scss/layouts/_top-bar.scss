@@ -105,24 +105,12 @@ $top-bar-submenu-border: 1px solid $white !default;
   flex: 1 1 auto;
   flex-wrap: nowrap;
   justify-content: space-between;
+}
 
-  .top-bar-left,
-  .top-bar-right {
-    align-items: stretch;
-    display: flex;
-
-    > .menu {
-      @include top-bar-menu-overwrite;
-    }
-
-    .menu {
-      @include top-bar-menu-style;
-
-      & .menu {
-        @include top-bar-submenu-style;
-      }
-    }
-  }
+/// @todo Documentation needed...
+@mixin top-bar-container-section {
+  align-items: stretch;
+  display: flex;
 }
 
 /// @todo Documentation needed...
@@ -170,5 +158,23 @@ $top-bar-submenu-border: 1px solid $white !default;
 
   .top-bar-container {
     @include top-bar-container;
+  }
+
+  .top-bar-left,
+  .top-bar-right {
+    @include top-bar-container-section;
+
+    .menu {
+      @include top-bar-menu-style;
+
+      & .menu {
+        @include top-bar-submenu-style;
+      }
+    }
+
+    // Reset
+    > .menu {
+      @include top-bar-menu-overwrite;
+    }
   }
 }
