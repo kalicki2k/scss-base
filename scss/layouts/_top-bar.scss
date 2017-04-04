@@ -6,7 +6,7 @@ $top-bar-padding: 0 !default;
 /// Background color for the top bar. This color also cascades to menus within the top bar.
 ///
 /// @type Color
-$top-bar-background:  scale-color($black, $lightness: 20%) !default;
+$top-bar-background: scale-color($black, $lightness: 20%) !default;
 
 /// Text color for the top bar title.
 ///
@@ -52,6 +52,16 @@ $top-bar-menu-item-background-active: $primary-color !default;
 ///
 /// @type Color
 $top-bar-menu-item-color-active: $white !default;
+
+/// Background color for submenus within the top bar.
+///
+/// @type Color
+$top-bar-submenu-background: $top-bar-background !default;
+
+/// Border style for submenus within the top bar.
+///
+/// @type List
+$top-bar-submenu-border: 1px solid $white !default;
 
 /// @todo Documentation needed...
 @mixin top-bar-base(
@@ -101,9 +111,16 @@ $top-bar-menu-item-color-active: $white !default;
     align-items: stretch;
     display: flex;
 
-    ul {
+    > .menu {
       @include top-bar-menu-overwrite;
+    }
+
+    .menu {
       @include top-bar-menu-style;
+
+      & .menu {
+        @include top-bar-submenu-style;
+      }
     }
   }
 }
@@ -117,6 +134,15 @@ $top-bar-menu-item-color-active: $white !default;
   $color-active: $top-bar-menu-item-color-active
 ) {
   @include menu-style($color, $background-hover, $color-hover, $background-active, $color-active);
+}
+
+/// @todo Documentation needed...
+@mixin top-bar-submenu-style(
+  $background: $top-bar-submenu-background,
+  $border: $top-bar-submenu-border
+){
+  background-color: $background;
+  border: $border;
 }
 
 /// @todo Documentation needed...
