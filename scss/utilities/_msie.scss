@@ -1,0 +1,23 @@
+/// Microsoft Internet Explorer 10 till 11.
+@mixin ie10-up {
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    @content;
+  }
+}
+
+/// Microsoft EDGE
+@mixin edge-up {
+  @supports (-ms-ime-align:auto) {
+    @content;
+  }
+}
+
+/// Microsoft Internet Explorer 10 till 11 plus EDGE.
+@mixin ie10-up-edge {
+  @include ie10-up {
+    @content;
+  }
+  @include edge-up {
+    @content;
+  }
+}
