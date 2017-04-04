@@ -1,0 +1,70 @@
+//  scss-base Settings
+//  ------------------
+//
+//  Table of Contents:
+//
+//   1. Color
+//   2. Base
+//   3. Top Bar
+
+
+// 1. Color
+// --------
+
+$black: #000000 !default;
+$grey: #bdbdbd !default;
+$white: #ffffff !default;
+$blue: #2185d0 !default;
+$red: #c62828 !default;
+$yellow: #ffdd57 !default;
+$green: #21ba45 !default;
+
+$primary-color: $blue !default;
+$secondary-color: $grey !default;
+$info-color: $blue !default;
+$success-color: $green !default;
+$warning-color: $yellow !default;
+$danger-color: $red !default;
+
+
+// 2. Base
+// -------
+
+$base-background: $white !default;
+$base-font-color: $black !default;
+$base-font-size: 100% !default;
+$base-font-family-sans-serif: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif !default;
+$base-font-family-serif: Georgia, Cambria, 'Times New Roman', Times, serif !default;
+$base-font-family-monospace: Consolas, 'Liberation Mono', Courier, monospace !default;
+$base-font-family: $base-font-family-sans-serif !default;
+$base-font-weight-normal: normal !default;
+$base-font-weight-bold: 700 !default;
+$base-line-height: 1.5 !default;
+$base-text-rendering: optimizeLegibility !default;
+$base-width: rem(1200) !default;
+$base-margin: rem-calc(16) !default;
+$base-radius: 3px !default;
+$base-opacity-disabled: .25 !default;
+$base-text-direction: ltr !default;
+
+// Internal variables used for text direction
+$base-left: if($base-text-direction == rtl, right, left);
+$base-right: if($base-text-direction == rtl, left, right);
+
+
+// 3. Top Bar
+// ---------
+
+$top-bar-padding: 0;
+$top-bar-background: mix($white, $black, 20%);
+
+$top-bar-title-color: $white;
+$top-bar-title-font-size: rem-calc(16);
+$top-bar-title-font-weight: $base-font-weight-bold;
+$top-bar-title-padding: rem-calc(10);
+
+$top-bar-menu-item-color: $white;
+$top-bar-menu-item-background-hover: mix($white, $black, 13.5%);
+$top-bar-menu-item-color-hover: $white;
+$top-bar-menu-item-background-active: $primary-color;
+$top-bar-menu-item-color-active: $white;
