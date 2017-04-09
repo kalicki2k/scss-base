@@ -257,9 +257,11 @@ $input-group-label-padding: 0 $form-spacing !default;
   background-size: $size;
 }
 
+@import 'forms/fieldset';
+
 @mixin forms() {
 
-  @include fieldset;
+  @include form-fieldset;
 
   label {
     color: $form-label-color;

@@ -1,32 +1,34 @@
 /// Default border around custom fieldsets.
 ///
 /// @type Border
-$fieldset-border: 1px solid $grey !default;
+$form-fieldset-border: 1px solid $grey !default;
 
 /// Default padding inside custom fieldsets.
 ///
 /// @type Number
-$fieldset-padding: rem-calc(16) !default;
+$form-fieldset-padding: rem-calc(16) !default;
 
 /// Default margin around custom fieldsets.
 ///
 /// @type Number
-$fieldset-margin: rem-calc(18 0) !default;
-
-/// Default padding between the legend text and fieldset border.
-///
-/// @type Number
-$fieldset-legend-padding: rem-calc(0 3) !default;
+$form-fieldset-margin: rem-calc(18 0) !default;
 
 /// Default margin below the legend text.
 ///
 /// @type Number
-$fieldset-legend-margin: rem-calc(8) !default;
+$form-fieldset-legend-margin: rem-calc(8) !default;
+
+/// Default padding between the legend text and fieldset border.
+///
+/// @type Number
+$form-fieldset-legend-padding: rem-calc(0 3) !default;
 
 @mixin fieldset-base(
-  $border: $fieldset-border,
-  $margin: $fieldset-margin,
-  $padding: $fieldset-padding
+  $border: $form-fieldset-border,
+  $margin: $form-fieldset-margin,
+  $padding: $form-fieldset-padding,
+  $legend-margin: $form-fieldset-legend-margin,
+  $legend-padding: $form-fieldset-legend-padding
 ) {
   border: $border;
   margin: $margin;
@@ -35,7 +37,7 @@ $fieldset-legend-margin: rem-calc(8) !default;
   legend {
     margin: 0;
     margin-#{$base-left}: rem-calc(-3);
-    padding: $fieldset-legend-padding;
+    padding: $legend-padding;
     background: $base-background;
   }
 }
@@ -49,7 +51,7 @@ $fieldset-legend-margin: rem-calc(8) !default;
 
   legend {
     max-width: 100%;
-    margin-bottom: $fieldset-legend-margin;
+    margin-bottom: $legend-margin;
   }
 
   .fieldset {
