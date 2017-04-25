@@ -18,7 +18,7 @@ base.directive('dropdownMenu', function dropdownMenuDirective($timeout) {
 				dropdownMenus = iElement[0].querySelectorAll('.menu');
 
 			angular.forEach(dropdownMenus, function (dropdownMenu) {
-				anchor = angular.element(dropdownMenu).parent().find('a');
+				anchor = angular.element(dropdownMenu.parentElement.querySelector('a'));
 				submenu = angular.element(dropdownMenu);
 
 				anchor.on('mouseenter', function () {
@@ -32,7 +32,6 @@ base.directive('dropdownMenu', function dropdownMenuDirective($timeout) {
 				}).on('mouseleave', function () {
 					anchorRemoveClass.apply(this);
 				});
-
 			});
 		}
 	};
