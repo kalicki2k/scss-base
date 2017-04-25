@@ -38,7 +38,7 @@ $menu-item-color-active: $white !default;
 /// @type Color
 $menu-item-background-active: $primary-color !default;
 
-/// Creates the base styles for a Menu.
+/// Creates the base styles for a menu.
 ///
 /// @param {Number} $margin [$menu-margin] -
 /// @param {Number} $item-padding [$menu-item-padding] -
@@ -74,8 +74,9 @@ $menu-item-background-active: $primary-color !default;
   }
 }
 
-/// Sets the direction for a Menu.
-/// @param {Keyword} $dir [horizontal] - Direction of the Menu can be `horizontal` or `vertical`.
+/// Sets the direction for a menu.
+///
+/// @param {Keyword} $dir [horizontal] - Direction of the menu can be `horizontal` or `vertical`.
 @mixin menu-direction($dir: horizontal) {
   @if $dir == horizontal {
     flex-wrap: nowrap;
@@ -100,7 +101,7 @@ $menu-item-background-active: $primary-color !default;
   }
 }
 
-/// Sets the style for a Menu.
+/// Sets the style for a menu.
 @mixin menu-style(
   $color: $menu-item-color,
   $background-hover: $menu-item-background-hover,
@@ -129,7 +130,7 @@ $menu-item-background-active: $primary-color !default;
   }
 }
 
-/// Outputs CSS classes for the grid.
+/// Outputs CSS classes for the menu.
 @mixin menu {
   .menu {
     @include menu-base;
