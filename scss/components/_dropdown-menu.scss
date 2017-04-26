@@ -43,7 +43,7 @@ $dropdownmenu-min-width: 200px !default;
       &.opens-left {
 
         > .menu {
-          right: auto;
+          left: 0;
           top: 100%;
         }
       }
