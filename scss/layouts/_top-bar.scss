@@ -53,15 +53,20 @@ $top-bar-menu-item-background-active: $primary-color !default;
 /// @type Color
 $top-bar-menu-item-color-active: $white !default;
 
-/// Background color for submenus within the top bar.
+/// Padding for top bar menu item.
+///
+/// @type Number
+$top-bar-menu-item-padding: rem-calc(10 20) !default;
+
+/// Background color for dropdown menus within the top bar.
 ///
 /// @type Color
-$top-bar-submenu-background: $top-bar-background !default;
+$top-bar-dropdownmenu-background: $top-bar-background !default;
 
-/// Border style for submenus within the top bar.
+/// Border style for dropdown menus within the top bar.
 ///
 /// @type List
-$top-bar-submenu-border: 1px solid $white !default;
+$top-bar-dropdownmenu-border: 1px solid $white !default;
 
 /// @todo Documentation needed...
 @mixin top-bar-base(
@@ -119,15 +124,20 @@ $top-bar-submenu-border: 1px solid $white !default;
   $background-hover: $top-bar-menu-item-background-hover,
   $color-hover: $top-bar-menu-item-color-hover,
   $background-active: $top-bar-menu-item-background-active,
-  $color-active: $top-bar-menu-item-color-active
+  $color-active: $top-bar-menu-item-color-active,
+  $padding: $top-bar-menu-item-padding
 ) {
   @include menu-style($color, $background-hover, $color-hover, $background-active, $color-active);
+
+  > li > a {
+    padding: $padding;
+  }
 }
 
 /// @todo Documentation needed...
-@mixin top-bar-submenu-style(
-  $background: $top-bar-submenu-background,
-  $border: $top-bar-submenu-border
+@mixin top-bar-dropdownmenu-style(
+  $background: $top-bar-dropdownmenu-background,
+  $border: $top-bar-dropdownmenu-border
 ){
   background-color: $background;
   border: $border;
@@ -168,7 +178,7 @@ $top-bar-submenu-border: 1px solid $white !default;
       @include top-bar-menu-style;
 
       & .menu {
-        @include top-bar-submenu-style;
+        @include top-bar-dropdownmenu-style;
       }
     }
 
