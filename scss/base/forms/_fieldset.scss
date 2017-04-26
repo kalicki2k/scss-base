@@ -37,12 +37,13 @@ $form-fieldset-legend-padding: rem-calc(0 3) !default;
   legend {
     margin: 0;
     margin-#{$base-left}: rem-calc(-3);
+    margin-bottom: $legend-margin;
     padding: $legend-padding;
     background: $base-background;
   }
 }
 
-@mixin fieldset {
+@mixin form-fieldset {
   fieldset {
     margin: 0;
     padding: 0;
@@ -51,7 +52,7 @@ $form-fieldset-legend-padding: rem-calc(0 3) !default;
 
   legend {
     max-width: 100%;
-    margin-bottom: $legend-margin;
+    margin-bottom: $form-fieldset-legend-margin;
   }
 
   .fieldset {
