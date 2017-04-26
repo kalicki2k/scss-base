@@ -46,6 +46,35 @@
     @return $value;
 }
 
+/// Converts a value to matching px value.
+///
+/// @param {Number} $value - Value to convert.
+/// @param {Number} $base [$base-font-size] - Base for pixel conversion.
+///
+/// @returns {Number} A number in pxs, calculated based on the given value and the base pixel value.
+@function px($value, $base: $base-font-size) {
+
+    // Convert $base to pixels
+    @if unit($base) == '%' {
+        $base: ($base / 100%) * 16px;
+    } @else if unit($base) == 'em' {
+        $base: strip-unit($base) * 16px;
+    } @else if unit($base) == 'rem' {
+        $base: strip-unit($base) * 16px;
+    }
+
+    // Convert $value to pixels
+    @if unit($value) == '%' {
+        $value: ($value / 100%) * $base;
+    } @else if unit($value) == 'em' {
+        $value: strip-unit($value) * $base;
+    } @else if unit($value) == 'rem' {
+        $value: strip-unit($value) * $base;
+    }
+
+    @return $value;
+}
+
 /// Converts a value to em.
 /// @access private
 ///
